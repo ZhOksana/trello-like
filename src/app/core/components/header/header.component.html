@@ -2,7 +2,8 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#"><img src="./assets/icons/trello.png" style="width:40px" alt="logo"></a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" href="./board"><img src="./assets/icons/trello.png" style="width:40px" alt="logo"></a>
+  </mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -17,8 +18,15 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/auth/sign-in" mdbWavesEffect>Sign in</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/auth/sign-up" mdbWavesEffect>Sign up</a>
+      </li>
     </ul>
-      <ul class="navbar-nav ms-auto col-4">
+    <ul class="navbar-nav ms-auto col-4">
+
       <!-- Search form -->
       <form class="form-inline waves-light" mdbWavesEffect>
         <div class="md-form my-0">
@@ -26,20 +34,17 @@
         </div>
       </form>
 
-      <!--Profile-->
+      <!--Profile dropdown-->
       <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" >
-          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span></a>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
+          <mdb-icon fas icon="user"></mdb-icon>
+          Profile<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">My account</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
         </div>
       </li>
-
     </ul>
-    <!-- Links -->
   </links>
-  <!-- Collapsible content -->
-
 </mdb-navbar>
-<!--/.Navbar-->
+

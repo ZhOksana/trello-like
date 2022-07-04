@@ -7,8 +7,8 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      { path: '', pathMatch: 'full', redirectTo: '1212' },
-      { path: '12', component: BoardComponent, pathMatch: 'full' },
+      { path: '', pathMatch: 'full', redirectTo: 'board' },
+      { path: 'board', component: BoardComponent, pathMatch: 'full' },
       { path: 's1212', component: BoardComponent, pathMatch: 'full' },
     ]
   }
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class BoardRoutingModule { }
