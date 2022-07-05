@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IUsers} from "@shared/interfaces/users.interface";
 import {UsersService} from "@core/services/users.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -18,7 +18,7 @@ export class SignInComponent {
   public isAlarmEmail: boolean = false;
   public isAlarmPass: boolean = false;
 
-  constructor(public fb: FormBuilder, private router: Router, private route: ActivatedRoute,) {
+  constructor(public fb: FormBuilder, private router: Router) {
     this.usersService = new UsersService();
     this.inSignForm = fb.group({
       email: [null, [Validators.required, Validators.email]],
@@ -44,8 +44,8 @@ export class SignInComponent {
     if (this.inSignForm.valid) {
       this.isAlarmForm = false;
       this.checkForm(this.inSignForm.value);
-      if (this.isAlarmEmail && this.isAlarmPass) {
-        this.router.navigate(['/board']);
+      if (!this.isAlarmEmail && !this.isAlarmPass) {
+        this.router.navigate(["/border"]);
       }
     } else {
       this.isAlarmForm = true;

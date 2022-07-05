@@ -1,10 +1,10 @@
-<div class="container-fluid wrap-box">
+<div class="container-fluid">
   <!-- Logo -->
   <div class="row justify-content-center mt-5">
     <img src="./assets/icons/trello-form-logo.PNG" style="border-radius: 45px" alt="logo-form">
   </div>
   <!-- Wrapper -->
-  <div class="row justify-content-center ">
+  <div class="row justify-content-center">
     <!-- Form login -->
     <form class="p-5 mt-5 form-box" [formGroup]="inSignForm">
       <!-- Email -->
@@ -43,9 +43,16 @@
       <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="signIn()">Sign in</button>
       <!-- Register -->
       <p class="text-center">Not a member?
-        <a href="">Register</a>
+        <a routerLink="/auth/sign-up">Register</a>
       </p>
     </form>
   </div>
-
+  <!-- Background image -->
+  <div class="background-image">
+    <div class="background-image__left"><img class="background-image--left" src="assets/images/bottom-left-auth-pic.png"
+                                             alt="bottom left auth pic"></div>
+    <div class="background-image__right"><img class="background-image--right"
+                                              src="assets/images/bottom-right-auth-pic.png" alt="bottom right auth pic">
+    </div>
+  </div>
 </div>

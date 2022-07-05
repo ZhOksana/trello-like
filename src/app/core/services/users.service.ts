@@ -10,6 +10,7 @@ export class UsersService {
       id: "1",
       email: "admin@mail.com",
       password: "1111",
+      role: "1"
     },
   ];
 
