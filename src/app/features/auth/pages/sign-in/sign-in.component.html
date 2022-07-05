@@ -1,49 +1,51 @@
-<div class="container-fluid">
-  <div class="row justify-content-center">
-<div class="page-space" >
-  <img src="./assets/icons/trello-form-logo.PNG" alt="logo-form">
-</div>
+<div class="container-fluid wrap-box">
+  <!-- Logo -->
+  <div class="row justify-content-center mt-5">
+    <img src="./assets/icons/trello-form-logo.PNG" style="border-radius: 45px" alt="logo-form">
+  </div>
+  <!-- Wrapper -->
+  <div class="row justify-content-center ">
+    <!-- Form login -->
+    <form class="p-5 mt-5 form-box" [formGroup]="inSignForm">
+      <!-- Email -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+        <input mdbInput formControlName="email" minLength="8" maxLength="25" type="email"
+               class="form-control mb-4" id="email">
+        <label for="email">Type your email</label>
+        <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
+          <span *ngIf="emailForm.errors.required">Email is required</span>
+          <span *ngIf="emailForm.errors.email">Enter valid email address</span>
+        </mdb-error>
+      </div>
+      <!-- Password -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
+                  [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
+        <input mdbInput formControlName="password" autocomplete="off" minLength="4" maxLength="25"
+               [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
+        <label for="password">Type your password</label>
+        <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
+          <span *ngIf="passwordForm.errors.required">Password is required</span>
+        </mdb-error>
+      </div>
+      <!-- Alarm -->
+      <div *ngIf="isAlarmForm" class="alert alert-danger text-center form-alert" role="alert">
+        Please fill out all the fields
+      </div>
+      <div *ngIf="isAlarmEmail" class="alert alert-danger text-center form-alert" role="alert">
+        There isn't an account for this email
+      </div>
+      <div *ngIf="isAlarmPass" class="alert alert-danger text-center form-alert" role="alert">
+        The entered password is incorrect
+      </div>
+      <!-- Submit button -->
+      <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="signIn()">Sign in</button>
+      <!-- Register -->
+      <p class="text-center">Not a member?
+        <a href="">Register</a>
+      </p>
+    </form>
   </div>
 
-<!-- Form login -->
-<form class="text-center p-5">
-  <p class="h4 mb-2">Sign in</p>
-  <!-- Email -->
-  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
-  <!-- Password -->
-  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
-  <div class="d-flex justify-content-around">
-    <div>
-      <!-- Remember me -->
-      <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
-    </div>
-    <div>
-      <!-- Forgot password -->
-      <a href="">Forgot password?</a>
-    </div>
-  </div>
-  <!-- Sign in button -->
-  <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
-  <!-- Register -->
-  <p>Not a member?
-    <a href="">Register</a>
-  </p>
-  <!-- Social login -->
-  <p>or sign in with:</p>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="facebook"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="twitter"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="linkedin"></mdb-icon>
-  </a>
-  <a type="button" class="light-blue-text mx-2">
-    <mdb-icon fab icon="github"></mdb-icon>
-  </a>
-</form>
-<!-- Default form login -->
-
-<div class="page-space"></div>
 </div>
