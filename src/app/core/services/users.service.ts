@@ -7,10 +7,18 @@ import {IUsers} from "@shared/interfaces/users.interface";
 export class UsersService {
   private users: IUsers[] = [
     {
-      id: "1",
       email: "admin@mail.com",
       password: "1111",
-      role: "1"
+      confirmPassword: "1111",
+      id: "0",
+      role: "0"
+    },
+    {
+      email: "user@mail.com",
+      password: "2222",
+      confirmPassword: "2222",
+      id: "0",
+      role: "0"
     },
   ];
 

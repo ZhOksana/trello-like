@@ -1,6 +1,7 @@
-import {IUserSignIn} from "@shared/interfaces/sign-in.interface";
-
-export interface IUsers extends IUserSignIn {
+export interface IUsers {
+  email: string,
+  password: string,
+  confirmPassword: string,
   id: string,
-  role: string
+  role: string,
 }

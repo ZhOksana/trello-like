@@ -9,8 +9,8 @@
     <form class="p-5 mt-5 form-box" [formGroup]="inSignForm">
       <!-- Email -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
-        <input mdbInput formControlName="email" minLength="8" maxLength="25" type="email"
+        <mdb-icon class="prefix" fas icon="envelope" size="1x"></mdb-icon>
+        <input mdbInput formControlName="email" type="email"
                class="form-control mb-4" id="email">
         <label for="email">Type your email</label>
         <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
@@ -22,7 +22,7 @@
       <div class="md-form">
         <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
                   [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
-        <input mdbInput formControlName="password" autocomplete="off" minLength="4" maxLength="25"
+        <input mdbInput formControlName="password" autocomplete="off"
                [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
         <label for="password">Type your password</label>
         <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
@@ -40,7 +40,7 @@
         The entered password is incorrect
       </div>
       <!-- Submit button -->
-      <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="signIn()">Sign in</button>
+      <button mdbBtn color="outline-success" block="true" class="my-4 rounded" type="submit" (click)="signIn()">Sign in</button>
       <!-- Register -->
       <p class="text-center">Not a member?
         <a routerLink="/auth/sign-up">Register</a>

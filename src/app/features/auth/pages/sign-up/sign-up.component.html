@@ -6,20 +6,82 @@
   <!-- Wrapper -->
   <div class="row justify-content-center">
     <!-- Form login -->
-    <form class="p-5 mt-5 form-box">
+    <form class="p-5 mt-5 form-box" [formGroup]="upSignForm">
 
+      <!-- First Name -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas icon="user"></mdb-icon>
+      <input mdbInput mdbValidate formControlName="firstName" type="text" id="firstName"
+             class="form-control mb-4">
+      <label for="firstName">Type your first name*</label>
+      <mdb-error *ngIf="firstNameForm.invalid && (firstNameForm.dirty || firstNameForm.touched)">
+        <span *ngIf="firstNameForm.errors.required">First name is required</span>
+        <span *ngIf="firstNameForm.errors.minlength">First name must be at least 2 characters longs</span>
+        <span *ngIf="firstNameForm.errors.maxlength">First name must be at most	20 characters longs</span>
+        <span *ngIf="firstNameForm.errors.pattern">Enter only letters</span>
+      </mdb-error>
+      </div>
+      <!-- Last Name -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas icon="user"></mdb-icon>
+        <input mdbInput mdbValidate formControlName="lastName" type="text" id="lastName"
+               class="form-control mb-4">
+        <label for="lastName">Type your last name*</label>
+        <mdb-error *ngIf="lastNameForm.invalid && (lastNameForm.dirty || lastNameForm.touched)">
+          <span *ngIf="lastNameForm.errors.required">First name is required</span>
+          <span *ngIf="lastNameForm.errors.minlength">First name must be at least 2 characters longs</span>
+          <span *ngIf="lastNameForm.errors.maxlength">First name must be at most 20 characters long</span>
+          <span *ngIf="lastNameForm.errors.pattern">Enter only letters</span>
+        </mdb-error>
+      </div>
+      <!-- Email -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+        <input mdbInput mdbValidate formControlName="email" type="email"
+               class="form-control mb-4" id="email">
+        <label for="email">Type your email*</label>
+        <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
+          <span *ngIf="emailForm.errors.required">Email is required</span>
+          <span *ngIf="emailForm.errors.email">Enter valid email address</span>
+        </mdb-error>
+      </div>
+      <div formGroupName="passwordGroup">
+      <!-- Password -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
+                  [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
+        <input mdbInput formControlName="password" autocomplete="off"
+               [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
+        <label for="password">Type your password*</label>
+        <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
+          <span *ngIf="passwordForm.errors.required">Password is required</span>
+          <span *ngIf="passwordForm.errors.minlength">Password must be at least 4 characters long</span>
+        </mdb-error>
+      </div>
+      <!-- Confirm password -->
+      <div class="md-form">
+        <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePassConf = !isHidePassConf"
+                  [class.fa-lock]="isHidePassConf" [class.fa-unlock]="!isHidePassConf"></mdb-icon>
+        <input mdbInput formControlName="confirmPassword" autocomplete="off"
+               [type]="isHidePassConf ? 'password' : 'text'" class="form-control" id="confirmPassword">
+        <label for="confirmPassword">Confirm your password*</label>
+        <mdb-error *ngIf="passwordConfForm.invalid && (passwordConfForm.dirty || passwordConfForm.touched)">
+          <span *ngIf="passwordConfForm.errors.required">Password is required</span>
+        </mdb-error>
+      </div>
+      </div>
       <!-- Alarm -->
-      <div  class="alert alert-danger text-center form-alert" role="alert">
-        Please fill out all the fields
+      <div *ngIf="upSignForm.invalid && isAlarmForm" class="alert alert-danger text-center form-alert" role="alert">
+        Please correctly fill out all the fields
       </div>
-      <div  class="alert alert-danger text-center form-alert" role="alert">
-        There isn't an account for this email
+      <div  *ngIf="isAlarmEmail" class="alert alert-danger text-center form-alert" role="alert">
+        Enter the correct email
       </div>
-      <div class="alert alert-danger text-center form-alert" role="alert">
-        The entered password is incorrect
+      <div *ngIf="isAlarmPass" class="alert alert-danger text-center form-alert" role="alert">
+        Passwords do not match
       </div>
       <!-- Submit button -->
-      <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+      <button mdbBtn color="outline-success" block="true" class="my-4" type="submit" (click)="signUp()">Sign Up</button>
       <!-- Register -->
       <p class="text-center">Already have an account?
         <a routerLink="/auth/sign-in">Log in</a>
