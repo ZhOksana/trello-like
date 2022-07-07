@@ -4,7 +4,7 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import {AuthRoutingModule} from "./auth-routing.module";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -19,6 +19,7 @@ import {ReactiveFormsModule} from "@angular/forms";
         AuthRoutingModule,
         MDBBootstrapModule,
         ReactiveFormsModule,
+        FormsModule,
     ]
 })
 export class AuthModule { }

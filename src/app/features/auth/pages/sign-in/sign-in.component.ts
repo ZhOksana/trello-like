@@ -52,6 +52,7 @@ export class SignInComponent {
         this.router.navigate(["/border"]);
       }
     } else {
+      this.inSignForm.markAllAsTouched();
       this.isAlarmForm = true;
     }
   }

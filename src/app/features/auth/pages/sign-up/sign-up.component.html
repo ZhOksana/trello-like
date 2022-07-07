@@ -6,11 +6,11 @@
   <!-- Wrapper -->
   <div class="row justify-content-center">
     <!-- Form login -->
-    <form class="p-5 mt-5 form-box" [formGroup]="upSignForm">
+    <form class="p-5 mt-5 form__box" [formGroup]="upSignForm">
 
       <!-- First Name -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas icon="user"></mdb-icon>
+        <mdb-icon class="prefix form__icon" fas icon="user"></mdb-icon>
       <input mdbInput mdbValidate formControlName="firstName" type="text" id="firstName"
              class="form-control mb-4">
       <label for="firstName">Type your first name*</label>
@@ -18,12 +18,12 @@
         <span *ngIf="firstNameForm.errors.required">First name is required</span>
         <span *ngIf="firstNameForm.errors.minlength">First name must be at least 2 characters longs</span>
         <span *ngIf="firstNameForm.errors.maxlength">First name must be at most	20 characters longs</span>
-        <span *ngIf="firstNameForm.errors.pattern">Enter only letters</span>
+        <span *ngIf="firstNameForm.errors.pattern && !firstNameForm.errors.minlength">Enter only latin letters</span>
       </mdb-error>
       </div>
       <!-- Last Name -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas icon="user"></mdb-icon>
+        <mdb-icon class="prefix form__icon" fas icon="user"></mdb-icon>
         <input mdbInput mdbValidate formControlName="lastName" type="text" id="lastName"
                class="form-control mb-4">
         <label for="lastName">Type your last name*</label>
@@ -31,12 +31,12 @@
           <span *ngIf="lastNameForm.errors.required">First name is required</span>
           <span *ngIf="lastNameForm.errors.minlength">First name must be at least 2 characters longs</span>
           <span *ngIf="lastNameForm.errors.maxlength">First name must be at most 20 characters long</span>
-          <span *ngIf="lastNameForm.errors.pattern">Enter only letters</span>
+          <span *ngIf="lastNameForm.errors.pattern && !lastNameForm.errors.minlength">Enter only latin letters</span>
         </mdb-error>
       </div>
       <!-- Email -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas icon="envelope"></mdb-icon>
+        <mdb-icon class="prefix form__icon" fas icon="envelope"></mdb-icon>
         <input mdbInput mdbValidate formControlName="email" type="email"
                class="form-control mb-4" id="email">
         <label for="email">Type your email*</label>
@@ -48,7 +48,7 @@
       <div formGroupName="passwordGroup">
       <!-- Password -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
+        <mdb-icon class="prefix btn-lock form__icon" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
                   [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
         <input mdbInput formControlName="password" autocomplete="off"
                [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
@@ -60,13 +60,15 @@
       </div>
       <!-- Confirm password -->
       <div class="md-form">
-        <mdb-icon class="prefix" fas (click)="$event.stopPropagation(); isHidePassConf = !isHidePassConf"
+        <mdb-icon class="prefix btn-lock form__icon" fas (click)="$event.stopPropagation(); isHidePassConf = !isHidePassConf"
                   [class.fa-lock]="isHidePassConf" [class.fa-unlock]="!isHidePassConf"></mdb-icon>
         <input mdbInput formControlName="confirmPassword" autocomplete="off"
                [type]="isHidePassConf ? 'password' : 'text'" class="form-control" id="confirmPassword">
         <label for="confirmPassword">Confirm your password*</label>
         <mdb-error *ngIf="passwordConfForm.invalid && (passwordConfForm.dirty || passwordConfForm.touched)">
-          <span *ngIf="passwordConfForm.errors.required">Password is required</span>
+          <span *ngIf="passwordConfForm.errors.required">Confirm password is required</span>
+          <span *ngIf="passwordConfForm.errors.incorrect">123321</span>
+          <span *ngIf="!passwordConfForm.valid">{{passwordConfForm.errors| json}}</span>
         </mdb-error>
       </div>
       </div>
@@ -74,14 +76,11 @@
       <div *ngIf="upSignForm.invalid && isAlarmForm" class="alert alert-danger text-center form-alert" role="alert">
         Please correctly fill out all the fields
       </div>
-      <div  *ngIf="isAlarmEmail" class="alert alert-danger text-center form-alert" role="alert">
-        Enter the correct email
-      </div>
-      <div *ngIf="isAlarmPass" class="alert alert-danger text-center form-alert" role="alert">
+      <div *ngIf="isAlarmConfPass && !isAlarmForm" class="alert alert-danger text-center form-alert" role="alert">
         Passwords do not match
       </div>
       <!-- Submit button -->
-      <button mdbBtn color="outline-success" block="true" class="my-4" type="submit" (click)="signUp()">Sign Up</button>
+      <button mdbBtn color="outline-success" block="true" class="my-4 mx-auto rounded form__btn" type="submit" (click)="signUp()">Sign Up</button>
       <!-- Register -->
       <p class="text-center">Already have an account?
         <a routerLink="/auth/sign-in">Log in</a>
