@@ -17,7 +17,6 @@ export class SignUpComponent {
   public isHidePassConf: boolean = true;
   public isAlarmForm: boolean = false;
   public isAlarmPass: boolean = false;
-  public isAlarmConfPass: boolean = false;
 
   constructor(public fb: FormBuilder, private router: Router) {
     this.usersService = new UsersService();
@@ -86,25 +85,22 @@ export class SignUpComponent {
         this.confirmPassword.setErrors(null);
         this.password.updateValueAndValidity();
       }
-      return this.isAlarmPass = false;
+      this.isAlarmPass = false;
     } else
-    return this.isAlarmPass = true;
-    }
+      this.isAlarmPass = true;
+  }
 
   signUp(): void {
-    console.log(this.upSignForm)
-    this.isAlarmConfPass = this.isAlarmPass;
-    this.upSignForm.controls['passwordGroup.confirmPassword'].setErrors({'incorrect': true});
-    this.upSignForm.updateValueAndValidity();
+    if (this.isAlarmPass) {
+      this.confirmPassword.setErrors({'incorrect': true});
+      this.password.updateValueAndValidity();
+    }
     if (this.upSignForm.invalid) {
       this.upSignForm.markAllAsTouched();
       this.isAlarmForm = true;
-    }
-    if (this.upSignForm.valid) {
+    } else if (this.upSignForm.valid) {
       this.isAlarmForm = false;
-      if (!this.isAlarmPass) {
-        this.router.navigate(["/border"]);
-      }
+      this.router.navigate(["/border"]);
     }
   }
 }
