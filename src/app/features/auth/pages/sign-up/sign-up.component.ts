@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {UsersService} from "@core/services/users.service";
-import {IUsers} from "@shared/interfaces/users.interface";
+import {IUser} from "@shared/interfaces/user.interface";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class SignUpComponent {
   private usersService: UsersService;
-  public users: IUsers[] = [];
+  public users: IUser[] = [];
   public upSignForm: FormGroup;
   public isHidePass: boolean = true;
   public isHidePassConf: boolean = true;

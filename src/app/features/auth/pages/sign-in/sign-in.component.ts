@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IUsers} from "@shared/interfaces/users.interface";
+import {IUser} from "@shared/interfaces/user.interface";
 import {UsersService} from "@core/services/users.service";
 import {Router} from "@angular/router";
 
@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class SignInComponent {
   private usersService: UsersService;
-  public users: IUsers[] = [];
+  public users: IUser[] = [];
   public inSignForm: FormGroup;
   public isHidePass: boolean = true;
   public isAlarmForm: boolean = false;
@@ -38,7 +38,7 @@ export class SignInComponent {
     return this.inSignForm.get('password');
   }
 
-  checkForm(form: IUsers): void {
+  checkForm(form: IUser): void {
     this.users = this.usersService.getUsers();
     this.isAlarmEmail = !this.users.find(user => user.email === form.email);
     this.isAlarmPass = !this.users.find(user => user.password === form.password);

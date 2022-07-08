@@ -1,4 +1,4 @@
-export interface IUsers {
+export interface IUser {
   email: string,
   password: string,
   confirmPassword: string,

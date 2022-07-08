@@ -1,38 +1,43 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule,Routes} from '@angular/router';
 import {AppRoutes} from "@shared/enums/app-routes";
 import {MainContainerComponent} from "@core/components/main-container/main-container.component";
+import {AuthContainerComponent} from "@core/components/auth-container/auth-container.component";
 
 
 const routes: Routes = [
-  {
-    path: AppRoutes.AUTH,
-    loadChildren: () =>
-      import('./features/auth/auth.module').then(m => m.AuthModule)
-  },
-  {
-    path: '',
+  {  path: '',
     component: MainContainerComponent,
+    // canActivate: [LoggedInUserGuard], // @todo  look how make guard
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('./features/board/board.module').then(m => m.BoardModule)
+        pathMatch: 'full',
+        loadChildren: () =>import('./features/boards/boards.module').then(m => m.BoardsModule)
       },
-      /* fix
-       {
-             path: 'user',
-             loadChildren: () =>
-               import('./features/home/home.module').then(m => m.HomeModule)
-           },
-           {
-             path: 'role',
-             loadChildren: () =>
-               import('./features/home/home.module').then(m => m.HomeModule)
-           },*/
+      {
+        path: "board/:boardId",
+        loadChildren: () =>import('./features/board/board.module').then(m => m.BoardModule)
+      },
+ /*     {
+        path: AppRoutes.PROFILE,
+        loadChildren: () =>import('./features/profile/profile.module').then(m => m.BoardsModule)
+      },*/
     ],
   },
-  {path: '**', redirectTo: ''},
+  {
+    path: AppRoutes.AUTH,
+    component: AuthContainerComponent,
+    // canActivate: [logOutUserGuard], // @todo  look how make guard
+    children: [
+      {
+        path: '',
+        loadChildren: () =>import('./features/auth/auth.module').then(m => m.AuthModule)
+      },
+    ],
+  },
+
+  {path: '**',redirectTo: ''},
 ];
 
 @NgModule({

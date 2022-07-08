@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {IUsers} from "@shared/interfaces/users.interface";
+import {IUser} from "@shared/interfaces/user.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private users: IUsers[] = [
+  private users: IUser[] = [
     {
       email: "admin@mail.com",
       password: "1111",
@@ -22,7 +22,7 @@ export class UsersService {
     },
   ];
 
-  public getUsers(): IUsers[] {
+  public getUsers(): IUser[] {
     return this.users;
   }
 

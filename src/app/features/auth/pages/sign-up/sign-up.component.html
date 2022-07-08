@@ -1,12 +1,10 @@
-<div class="container-fluid">
-  <!-- Logo -->
-  <div class="row justify-content-center mt-5">
-    <img src="./assets/icons/trello-form-logo.PNG" style="border-radius: 45px" alt="logo-form">
-  </div>
-  <!-- Wrapper -->
-  <div class="row justify-content-center">
-    <!-- Form login -->
+
+    <!-- Form registration -->
     <form class="p-5 mt-5 form__box" [formGroup]="upSignForm">
+      <!-- Form header -->
+      <div class="form__header">
+        Sign Up
+      </div>
       <!-- First Name -->
       <div class="md-form">
         <mdb-icon class="prefix form__icon" fas icon="user"></mdb-icon>
@@ -81,13 +79,3 @@
         <a routerLink="/auth/sign-in">Log in</a>
       </p>
     </form>
-  </div>
-  <!-- Background image -->
-  <div class="background-image">
-    <div class="background-image__left"><img class="background-image--left" src="assets/images/bottom-left-auth-pic.png"
-                                             alt="bottom left auth pic"></div>
-    <div class="background-image__right"><img class="background-image--right"
-                                              src="assets/images/bottom-right-auth-pic.png" alt="bottom right auth pic">
-    </div>
-  </div>
-</div>

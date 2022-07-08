@@ -8,12 +8,14 @@ import { MainContainerComponent } from '@core/components/main-container/main-con
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
+import { AuthContainerComponent } from '@core/components/auth-container/auth-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MainContainerComponent,
+    AuthContainerComponent,
   ],
   imports: [
     BrowserModule,
