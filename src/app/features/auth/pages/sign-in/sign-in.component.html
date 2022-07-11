@@ -1,10 +1,10 @@
 <!-- Form login -->
-<form class="p-5 mt-5 form__box" [formGroup]="inSignForm">
+<form class="pt-5 px-5 pb-1 mt-5 form__box" [formGroup]="inSignForm">
   <!-- Form header -->
   <div class="form__header">
     Sign In
   </div>
-  <!-- Email -->
+    <!-- Email -->
   <div class="md-form">
     <div [ngSwitch]="emailForm.status">
       <mdb-icon class="prefix form__icon" fas icon="envelope-circle-check" *ngSwitchCase="'VALID'"></mdb-icon>

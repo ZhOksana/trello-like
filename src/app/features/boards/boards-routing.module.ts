@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {BoardsComponent} from "./pages/boards/boards.component";
+import {BoardListComponent} from "./pages/board-list/board-list.component";
 
 
 const routes: Routes = [
-      { path: '', component: BoardsComponent, pathMatch: 'full' }
+      { path: '', component: BoardListComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

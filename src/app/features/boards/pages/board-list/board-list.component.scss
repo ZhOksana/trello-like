@@ -1,0 +1,64 @@
+.container {
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Segoe UI, Roboto, sans-serif;
+}
+
+.boards__header {
+  min-width: 100%;
+  font-weight: 500;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+.board {
+  position: relative;
+
+  &__link {
+    height: 90px;
+    width: 160px;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    background-size: cover;
+    background-color: green;
+    background-position: 50% 50%;
+  }
+
+  &--fade {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #00000026;
+    }
+  }
+
+  &__name {
+    position: relative;
+    top: 7px;
+    left: 7px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__add-btn {
+    border: none;
+    background-color: rgba(9, 31, 68, 0.08);
+    color: #172b4d;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background-color: rgba(9, 30, 66, 0.11);
+    }
+  }
+}

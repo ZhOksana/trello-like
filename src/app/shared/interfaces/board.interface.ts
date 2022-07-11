@@ -1,4 +1,5 @@
 export interface IBoard {
   boardId: string,
-  name: string,
+  boardName: string,
+  boardBackground: string,
 }

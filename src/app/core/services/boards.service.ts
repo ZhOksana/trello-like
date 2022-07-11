@@ -9,15 +9,18 @@ export class BoardsService {
   private boards: IBoard[] = [
     {
       boardId: "0",
-      name: "Work"
+      boardName: "Work",
+      boardBackground: "green",
     },
     {
       boardId: "1",
-      name: "Home"
+      boardName: "Home",
+      boardBackground: "violet",
     },
     {
       boardId: "2",
-      name: "Family"
+      boardName: "Family",
+      boardBackground: "orange",
     },
   ];
 
@@ -25,4 +28,13 @@ export class BoardsService {
     return this.boards;
   }
 
+  public addBoard(board: any): void {
+    this.boards.push({...board, boardId: this.boards.length + 1})
+  }
+
+  public deleteBoard(boardId: string): void {
+    this.boards = this.boards.filter(function (item) {
+      return item.boardId !== boardId
+    })
+  }
 }

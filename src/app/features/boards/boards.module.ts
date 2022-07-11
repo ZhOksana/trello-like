@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BoardsComponent} from "./pages/boards/boards.component";
+import {BoardListComponent} from "./pages/board-list/board-list.component";
 import {BoardsRoutingModule} from "./boards-routing.module";
+import { BoardAddComponent } from './pages/board-add/board-add.component';
+import {MDBBootstrapModule} from "angular-bootstrap-md";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [
-    BoardsComponent,
+    BoardListComponent,
+    BoardAddComponent,
   ],
   imports: [
     CommonModule,
-    BoardsRoutingModule
+    BoardsRoutingModule,
+    MDBBootstrapModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class BoardsModule { }

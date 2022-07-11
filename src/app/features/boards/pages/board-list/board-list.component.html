@@ -1,0 +1,18 @@
+<div class="container">
+  <!-- Boards header -->
+  <h3 class="mt-4  boards__header">Boards gallery:</h3>
+  <!-- Boards list -->
+  <ul class="mt-4 d-flex align-items-center">
+    <li *ngFor="let item of boards" class="board__link m-2" [style.background]=item.boardBackground>
+      <a [routerLink]="['board', item.boardId]">
+        <h4 class="board__name">{{item.boardName}}
+        </h4>
+        <span class="board--fade"></span>
+      </a>
+    </li>
+    <!-- Add new board -->
+    <button class="board__link m-2 board__add-btn" (click)="openModal()">
+      Add new board
+    </button>
+  </ul>
+</div>
