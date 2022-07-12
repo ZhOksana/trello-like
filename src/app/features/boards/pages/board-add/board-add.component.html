@@ -2,9 +2,9 @@
 <div mdbModal class=" modal-side modal-top-right" tabindex="-1" role="dialog" aria-labelledby="modalAddBoard"
      aria-hidden="false">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content rounded">
       <!-- Modal header -->
-      <div class="modal-header">
+      <div class="modal-header form__header">
         <button type="button" class="close pull-right" aria-label="Close" (click)="closeBoard()">
           <span aria-hidden="true">×</span>
         </button>
@@ -12,98 +12,42 @@
       </div>
       <!-- Modal body -->
       <div class="modal-body d-flex flex-column justify-content-start">
-        <img class="align-self-center" src="./assets/images/add-board-preview-img.svg" alt="board preview image"
-             [style.background]="this.boards">
+        <img class="align-self-center p-2 mb-2" src="./assets/images/add-board-preview-img.svg" alt="board preview image" [style.background-color]=this.addBoardForm.value.boardBackground>
         <!-- Add board form -->
-        <form class="form__box p-2 m-2" [formGroup]="addBoardForm">
+        <form class=" pb-0 mb-0 px-2 mx-2" [formGroup]="addBoardForm">
           <!-- Background color -->
           <div class="text-left">
             Select board background
           </div>
-          <div>
-            <ul class="d-flex flex-wrap radio-group">
-              <li>
-                <input type="radio" class="" id="defaultInline1" name="inlineDefaultRadiosExample" mdbInput checked>
-                <label for="defaultInline1" [style.background-color]=bgColorBoard.GREEN >
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline2" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label for="defaultInline2" [style.background-color]=bgColorBoard.BLUE>
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline3" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline3">
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline4" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline4">
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline5" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline5">
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline6" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline6">
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline7" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline7">
-                  <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-                  <span class="radio-group--fade"></span>
-                </label>
-              </li>
-              <li>
-                <input type="radio" class="" id="defaultInline8" name="inlineDefaultRadiosExample"
-                       mdbInput>
-                <label class="" for="defaultInline8">
+            <ul class="row no-gutters m-0 text-center">
+              <li class="radio-group col-3" *ngFor="let item of bgBoard; let i = index">
+                <input type="radio" formControlName="boardBackground" [value]="item.boardBackground" id="{{i}}" name="boardBackground" mdbInput>
+                <label for="{{i}}" [style.background-color]=item.boardBackground>
                   <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
                   <span class="radio-group--fade"></span>
                 </label>
               </li>
             </ul>
-          </div>
           <!-- Name -->
           <div class="md-form">
-            <input mdbInput formControlName="nameBoard" autocomplete="off"
+            <input mdbInput mdbValidate formControlName="boardName" autocomplete="off"
                    type="text" class="form-control" id="nameBoard">
-            <label for="nameBoard">Enter a board name</label>
-
+            <label for="nameBoard">Enter a board name*</label>
+            <mdb-error *ngIf="boardNameForm.invalid && (boardNameForm.dirty || boardNameForm.touched)">
+              <span *ngIf="boardNameForm.errors.required">Board name is required</span>
+              <span *ngIf="boardNameForm.errors.maxlength">Please enter at most 15 characters</span>
+            </mdb-error>
           </div>
           <!-- Submit button -->
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light rounded" aria-label="Close"
+      <div class="modal-footer justify-content-center">
+        <button type="button" mdbBtn color="secondary" class="waves-light relative rounded" aria-label="Close"
                 (click)="closeBoard()"
                 mdbWavesEffect>Cancel
         </button>
-        <button mdbBtn color="primary" class="relative waves-light" type="submit"
-                (click)="addBoard(this.addBoardForm.value)" mdbWavesEffect>Save!
+        <button type="submit" mdbBtn color="primary" class="waves-light relative rounded"
+                (click)="addBoard(this.addBoardForm.value)" mdbWavesEffect>Create
         </button>
       </div>
     </div>

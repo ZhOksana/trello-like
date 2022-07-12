@@ -2,8 +2,8 @@
   <!-- Boards header -->
   <h3 class="mt-4  boards__header">Boards gallery:</h3>
   <!-- Boards list -->
-  <ul class="mt-4 d-flex align-items-center">
-    <li *ngFor="let item of boards" class="board__link m-2" [style.background]=item.boardBackground>
+  <ul class="mt-4 d-flex flex-wrap align-items-center">
+    <li *ngFor="let item of boards" class="board__link m-2 z-depth-1" [style.background]=item.boardBackground>
       <a [routerLink]="['board', item.boardId]">
         <h4 class="board__name">{{item.boardName}}
         </h4>

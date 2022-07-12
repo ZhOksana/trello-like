@@ -1,5 +1,4 @@
-import {Component} from '@angular/core';
-import {UsersService} from "@core/services/users.service";
+import {Component, OnInit} from '@angular/core';
 import {IUser} from "@shared/interfaces/user.interface";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -9,8 +8,9 @@ import {Router} from "@angular/router";
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
-  private usersService: UsersService;
+export class SignUpComponent implements OnInit {
+
+
   public users: IUser[] = [];
   public upSignForm: FormGroup;
   public isHidePass: boolean = true;
@@ -18,12 +18,11 @@ export class SignUpComponent {
   public isAlarmForm: boolean = false;
   public isAlarmPass: boolean = false;
 
-  constructor(public fb: FormBuilder, private router: Router) {
-    this.usersService = new UsersService();
-    this._createForm();
+  constructor(public fb: FormBuilder,
+              private router: Router) {
   }
 
-  private _createForm() {
+  ngOnInit() {
     this.upSignForm = this.fb.group({
       firstName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]{2,20}$/), Validators.minLength(2), Validators.maxLength(20)]],
       lastName: [null, [Validators.required, Validators.pattern(/^[a-zA-Z]{2,20}$/), Validators.minLength(2), Validators.maxLength(20)]],

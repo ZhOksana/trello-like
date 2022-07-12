@@ -1,5 +1,5 @@
 <!-- Form registration -->
-<form class="pt-5 px-5 pb-3 mt-5 form__box" [formGroup]="upSignForm">
+<form class="pt-5 px-5 pb-3 mt-5 form__box z-depth-1" [formGroup]="upSignForm">
   <!-- Form header -->
   <div class="form__header">
     Sign Up
@@ -26,7 +26,7 @@
     <mdb-error *ngIf="lastNameForm.invalid && (lastNameForm.dirty || lastNameForm.touched)">
       <span *ngIf="lastNameForm.errors.required">First name is required</span>
       <span *ngIf="lastNameForm.errors.minlength">Please enter at least 2 characters</span>
-      <span *ngIf="lastNameForm.errors.maxlength">Please enter at most	20 characters</span>
+      <span *ngIf="lastNameForm.errors.maxlength">Please enter at most 20 characters</span>
       <span *ngIf="lastNameForm.errors.pattern && !lastNameForm.errors.minlength">Please enter only latin letters</span>
     </mdb-error>
   </div>

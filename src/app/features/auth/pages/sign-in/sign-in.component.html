@@ -1,5 +1,5 @@
 <!-- Form login -->
-<form class="pt-5 px-5 pb-1 mt-5 form__box" [formGroup]="inSignForm">
+<form class="pt-5 px-5 pb-1 mt-5 form__box z-depth-1" [formGroup]="inSignForm">
   <!-- Form header -->
   <div class="form__header">
     Sign In
@@ -11,7 +11,7 @@
       <mdb-icon class="prefix form__icon" fas icon="envelope" *ngSwitchDefault></mdb-icon>
       <input mdbInput formControlName="email" type="email"
              class="form-control mb-4" id="email">
-      <label for="email">Type your email</label>
+      <label for="email">Type your email*</label>
       <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
         <span *ngIf="emailForm.errors.required">Email is required</span>
         <span *ngIf="emailForm.errors.email">Enter valid email address</span>
@@ -23,7 +23,7 @@
                 [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
       <input mdbInput formControlName="password" autocomplete="off"
              [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
-      <label for="password">Type your password</label>
+      <label for="password">Type your password*</label>
       <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
         <span *ngIf="passwordForm.errors.required">Password is required</span>
       </mdb-error>

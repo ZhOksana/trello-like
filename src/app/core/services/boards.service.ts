@@ -10,18 +10,29 @@ export class BoardsService {
     {
       boardId: "0",
       boardName: "Work",
-      boardBackground: "green",
+      boardBackground: "#D29034",
     },
     {
       boardId: "1",
       boardName: "Home",
-      boardBackground: "violet",
+      boardBackground: "#519839",
     },
     {
       boardId: "2",
       boardName: "Family",
-      boardBackground: "orange",
+      boardBackground: "#4BBF6B",
     },
+  ];
+
+  bgColorBoard = [
+    {boardBackground: "#838C91"},
+    {boardBackground: "#D29034"},
+    {boardBackground: "#519839"},
+    {boardBackground: "#B04632"},
+    {boardBackground: "#89609E"},
+    {boardBackground: "#4BBF6B"},
+    {boardBackground: "#00AECC"},
+    {boardBackground: "#0067A3"},
   ];
 
   public getBoards(): IBoard[] {
@@ -29,7 +40,7 @@ export class BoardsService {
   }
 
   public addBoard(board: any): void {
-    this.boards.push({...board, boardId: this.boards.length + 1})
+    this.boards.push({...board, boardId: this.boards.length + 1, boardBackground: board.boardBackground})
   }
 
   public deleteBoard(boardId: string): void {

@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
 import {IBoard} from "@shared/interfaces/board.interface";
 import {MDBModalService} from "angular-bootstrap-md";
-import {BgColorBoard} from "@shared/enums/bgColor-board";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-board-add',
@@ -11,40 +11,40 @@ import {BgColorBoard} from "@shared/enums/bgColor-board";
   styleUrls: ['./board-add.component.scss']
 })
 export class BoardAddComponent {
-  private boardsService: BoardsService;
+
   public boards: IBoard[] = [];
   public addBoardForm: FormGroup;
-public bgColorBoard = BgColorBoard;
+  public action = new Subject<any>();
+  public bgBoard = this.boardsService.bgColorBoard;
 
-  constructor(public fb: FormBuilder, private modalService: MDBModalService) {
+  constructor(public fb: FormBuilder,
+              private modalService: MDBModalService,
+              private boardsService: BoardsService) {
     this._createForm();
-    this.boardsService = new BoardsService();
   }
 
   private _createForm() {
     this.addBoardForm = this.fb.group({
-      boardBackground: [null, Validators.required],
-      nameBoard: [null, [Validators.required]],
+      boardBackground: ['#838C91', Validators.required],
+      boardName: [null, [Validators.required, Validators.maxLength(15)]],
     });
   }
 
-  get boardBackground() {
-    return this.addBoardForm.get('boardBackground');
-  }
-
-  get nameBoard() {
-    return this.addBoardForm.get('nameBoard');
+  get boardNameForm() {
+    return this.addBoardForm.get('boardName');
   }
 
   addBoard(form) {
-    this.boards = this.boardsService.getBoards();
-    this.boardsService.addBoard(form);
-    this.modalService.hide(1);
-    console.log(this.addBoardForm.value);
-    console.log(this.addBoardForm);
+    if (this.addBoardForm.invalid) {
+      this.addBoardForm.markAllAsTouched();
+    } else if (this.addBoardForm.valid) {
+      this.boards = this.boardsService.getBoards();
+      this.action.next(form);
+      this.modalService.hide(1);
+    }
   }
 
-  closeBoard () {
+  closeBoard() {
     this.modalService.hide(1);
   }
 }

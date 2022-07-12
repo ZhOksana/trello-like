@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IUser} from "@shared/interfaces/user.interface";
 import {UsersService} from "@core/services/users.service";
@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent {
-  private usersService: UsersService;
+export class SignInComponent implements OnInit {
+
   public users: IUser[] = [];
   public inSignForm: FormGroup;
   public isHidePass: boolean = true;
@@ -18,12 +18,12 @@ export class SignInComponent {
   public isAlarmEmail: boolean = false;
   public isAlarmPass: boolean = false;
 
-  constructor(public fb: FormBuilder, private router: Router) {
-    this.usersService = new UsersService();
-    this._createForm()
+  constructor(public fb: FormBuilder,
+              private router: Router,
+              private usersService: UsersService) {
   }
 
-  private _createForm() {
+  ngOnInit() {
     this.inSignForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required],
