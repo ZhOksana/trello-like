@@ -3,7 +3,7 @@ import {BoardsService} from "@core/services/boards.service";
 import {IBoard} from "@shared/interfaces/board.interface";
 import {BoardAddComponent} from "../board-add/board-add.component";
 import {MDBModalRef, MDBModalService} from "angular-bootstrap-md";
-import { take} from "rxjs";
+import {take} from "rxjs";
 import {BoardEditComponent} from "../board-edit/board-edit.component";
 
 @Component({
@@ -14,7 +14,6 @@ import {BoardEditComponent} from "../board-edit/board-edit.component";
 export class BoardListComponent {
 
   public boards: IBoard[] = [];
-  public board: IBoard;
   public modalRef: MDBModalRef | null = null;
 
   constructor(private modalService: MDBModalService,
@@ -38,7 +37,6 @@ export class BoardListComponent {
       containerClass: 'right',
       animated: true,
     });
-    console.log(this.modalRef)
     this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoard) => {
       this.boardsService.addBoard(board);
       this.getBoards();
@@ -55,10 +53,13 @@ export class BoardListComponent {
       class: 'modal-side modal-sm modal-top-right mt-3 pt-3',
       containerClass: 'right',
       animated: true,
+      data: {
+         id
+      }
     });
     console.log(this.modalRef);
-    this.modalRef.content.actionEdit.pipe(take(1)).subscribe((id) => {
-      this.boardsService.getBoardById(id);
+    this.modalRef.content.actionEdit.pipe(take(1)).subscribe((board: IBoard) => {
+      this.boardsService.getBoardById(board);
       console.log(this.boards)
     });
 

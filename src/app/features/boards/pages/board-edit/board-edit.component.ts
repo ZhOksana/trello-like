@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
 import {IBoard} from "@shared/interfaces/board.interface";
-import { MDBModalService} from "angular-bootstrap-md";
+import {MDBModalService} from "angular-bootstrap-md";
 import {Subject} from "rxjs";
 
 
@@ -13,11 +13,12 @@ import {Subject} from "rxjs";
 })
 export class BoardEditComponent implements OnInit {
 
-  public board: IBoard;
+  public id: number;
   public editBoardForm: FormGroup;
   public actionEdit = new Subject<any>();
   public bgBoard = this.boardsService.bgColorBoard;
-  public boards: IBoard[] = [];
+  public board: IBoard;
+
 
   constructor(public fb: FormBuilder,
               private modalService: MDBModalService,
@@ -26,28 +27,27 @@ export class BoardEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getBoards();
+    console.log(this.id);
     this.editBoardForm = this.fb.group({
       boardId: [],
-      boardBackground: ['#838C91', Validators.required],
-      boardName: [null, [Validators.required, Validators.maxLength(15)]],
+      boardBackground: [Validators.required],
+      boardName: [Validators.required, Validators.maxLength(15)],
+      isFavorite:[],
     });
-  }
-
-  getBoards(): void {
-    this.boards = this.boardsService.getBoards();
+    this.getBoardById(this.id);
   }
 
   get boardNameForm() {
     return this.editBoardForm.get('boardName');
   }
 
-  getBoardById(id: string): void {
-
+  getBoardById(id): void {
+    console.log(id);
+    console.log(this.boardsService.getBoardById(id));
     this.board = this.boardsService.getBoardById(id);
+    this.actionEdit.next(id);
     console.log(this.board);
-    this.editBoardForm.patchValue(this.board);
-
+     this.editBoardForm.patchValue(this.board);
   }
 
 /*  editBoard(form) {

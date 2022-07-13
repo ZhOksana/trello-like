@@ -1,9 +1,9 @@
 <div class="container">
   <!-- Favorite boards -->
     <!-- Boards header -->
-    <h3 *ngIf="boards| favoriteHeader:boards" class="mt-4 boards__header">Favorites boards:</h3>
+    <h3 *ngIf="boards | favoriteHeader" class="mt-4 boards__header">Favorites boards:</h3>
     <ul class="mt-4 d-flex flex-wrap align-items-center">
-      <li *ngFor="let item of boards | favoriteBoards:boards" class="board__list m-2 z-depth-1"
+      <li *ngFor="let item of boards | favoriteBoards" class="board__list m-2 z-depth-1"
           [style.background]=item.boardBackground>
         <div class="d-flex flex-column justify-content-between board__content">
           <!-- Board link -->

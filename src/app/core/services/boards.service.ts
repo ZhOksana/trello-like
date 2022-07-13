@@ -42,7 +42,7 @@ export class BoardsService {
     return this.boards;
   }
 
-  getBoardById(id): IBoard {
+  public getBoardById(id): IBoard {
     return this.boards.filter(item => item.boardId === id)[0];
   }
 
