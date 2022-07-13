@@ -15,28 +15,56 @@ ul {
 }
 
 .board {
-  position: relative;
+  &__name {
+    user-select: none;
+  }
 
-  &__link {
+  &__list {
+    display: block;
     height: 90px;
     width: 160px;
     border-radius: 3px;
-    display: block;
-    position: relative;
-    background-size: cover;
-    background-position: 50% 50%;
+
+    &:hover {
+      .board__btn {
+        display: block;
+      }
+
+      .board__name {
+        z-index: 20;
+      }
+    }
   }
 
-  &--fade {
+  &__link {
+    z-index: 10;
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 3px;
 
     &:hover {
       background-color: #00000026;
+    }
+  }
+
+  &__content {
+    position: relative;
+    height: 100%;
+  }
+
+  &__btn {
+    padding: 4px 8px;
+    z-index: 20;
+    display: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+
+    &:hover {
+      color: black;
     }
   }
 
@@ -49,15 +77,20 @@ ul {
     font-weight: 600;
   }
 
-  &__add-btn {
+  &__btn-add {
     border: none;
     background-color: rgba(9, 31, 68, 0.08);
     color: #172b4d;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
+    padding: 10px 32px;
 
     &:hover {
       background-color: rgba(9, 30, 66, 0.11);
     }
   }
+}
+.favorite {
+  color: gold;
 }

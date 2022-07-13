@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
 import {IBoard} from "@shared/interfaces/board.interface";
-import {MDBModalService} from "angular-bootstrap-md";
+import { MDBModalService} from "angular-bootstrap-md";
 import {Subject} from "rxjs";
 
 @Component({
@@ -10,21 +10,22 @@ import {Subject} from "rxjs";
   templateUrl: './board-add.component.html',
   styleUrls: ['./board-add.component.scss']
 })
-export class BoardAddComponent {
+export class BoardAddComponent implements OnInit{
 
   public boards: IBoard[] = [];
   public addBoardForm: FormGroup;
-  public action = new Subject<any>();
+  public actionAdd = new Subject<any>();
   public bgBoard = this.boardsService.bgColorBoard;
+
 
   constructor(public fb: FormBuilder,
               private modalService: MDBModalService,
               private boardsService: BoardsService) {
-    this._createForm();
   }
 
-  private _createForm() {
+  ngOnInit() {
     this.addBoardForm = this.fb.group({
+      boardId: [''],
       boardBackground: ['#838C91', Validators.required],
       boardName: [null, [Validators.required, Validators.maxLength(15)]],
     });
@@ -39,7 +40,7 @@ export class BoardAddComponent {
       this.addBoardForm.markAllAsTouched();
     } else if (this.addBoardForm.valid) {
       this.boards = this.boardsService.getBoards();
-      this.action.next(form);
+      this.actionAdd.next(form);
       this.modalService.hide(1);
     }
   }
