@@ -11,6 +11,7 @@ import {BoardEditComponent} from "../board-edit/board-edit.component";
   templateUrl: './board-list.component.html',
   styleUrls: ['./board-list.component.scss']
 })
+
 export class BoardListComponent {
 
   public boards: IBoard[] = [];
@@ -54,13 +55,11 @@ export class BoardListComponent {
       containerClass: 'right',
       animated: true,
       data: {
-         id
+        id
       }
     });
-    console.log(this.modalRef);
-    this.modalRef.content.actionEdit.pipe(take(1)).subscribe((board: IBoard) => {
-      this.boardsService.getBoardById(board);
-      console.log(this.boards)
+    this.modalRef.content.actionEdit.pipe(take(1)).subscribe(() => {
+      this.getBoards();
     });
 
   }

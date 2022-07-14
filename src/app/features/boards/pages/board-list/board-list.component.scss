@@ -78,19 +78,27 @@ ul {
   }
 
   &__btn-add {
+    position: relative;
     border: none;
     background-color: rgba(9, 31, 68, 0.08);
     color: #172b4d;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
-    padding: 10px 32px;
+    padding: 10px 0 10px 28px;
 
     &:hover {
       background-color: rgba(9, 30, 66, 0.11);
     }
+
+    &-icon {
+      position: absolute;
+      top: 44px;
+      left: 16px;
+    }
   }
 }
+
 .favorite {
   color: gold;
 }

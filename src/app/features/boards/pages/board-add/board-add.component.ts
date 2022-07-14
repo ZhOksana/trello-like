@@ -2,15 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
 import {IBoard} from "@shared/interfaces/board.interface";
-import { MDBModalService} from "angular-bootstrap-md";
+import {MDBModalService} from "angular-bootstrap-md";
 import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-board-add',
   templateUrl: './board-add.component.html',
-  styleUrls: ['./board-add.component.scss']
+  styleUrls: ['../../../../styles/boards.scss']
 })
-export class BoardAddComponent implements OnInit{
+
+export class BoardAddComponent implements OnInit {
 
   public boards: IBoard[] = [];
   public addBoardForm: FormGroup;
@@ -28,6 +29,7 @@ export class BoardAddComponent implements OnInit{
       boardId: [''],
       boardBackground: ['#838C91', Validators.required],
       boardName: [null, [Validators.required, Validators.maxLength(15)]],
+      isFavorite: [false],
     });
   }
 

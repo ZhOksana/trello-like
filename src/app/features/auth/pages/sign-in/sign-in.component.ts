@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IUser} from "@shared/interfaces/user.interface";
 import {UsersService} from "@core/services/users.service";
 import {Router} from "@angular/router";
@@ -7,8 +7,12 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: [
+    '../../../../styles/auth.scss',
+    './sign-in.component.scss'
+  ]
 })
+
 export class SignInComponent implements OnInit {
 
   public users: IUser[] = [];
@@ -30,11 +34,11 @@ export class SignInComponent implements OnInit {
     });
   }
 
-  get emailForm() {
+  get emailForm(): AbstractControl {
     return this.inSignForm.get('email');
   }
 
-  get passwordForm() {
+  get passwordForm(): AbstractControl {
     return this.inSignForm.get('password');
   }
 

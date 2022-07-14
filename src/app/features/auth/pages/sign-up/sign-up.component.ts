@@ -6,8 +6,12 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: [
+    '../../../../styles/auth.scss',
+    './sign-up.component.scss'
+  ]
 })
+
 export class SignUpComponent implements OnInit {
 
 
@@ -35,23 +39,23 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  get firstNameForm() {
+  get firstNameForm(): AbstractControl {
     return this.upSignForm.get('firstName');
   }
 
-  get lastNameForm() {
+  get lastNameForm(): AbstractControl {
     return this.upSignForm.get('lastName');
   }
 
-  get emailForm() {
+  get emailForm(): AbstractControl {
     return this.upSignForm.get('email');
   }
 
-  get passwordForm() {
+  get passwordForm(): AbstractControl {
     return this.upSignForm.get('passwordGroup.password');
   }
 
-  get passwordConfForm() {
+  get passwordConfForm(): AbstractControl {
     return this.upSignForm.get('passwordGroup.confirmPassword');
   }
 

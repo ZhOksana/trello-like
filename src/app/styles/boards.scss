@@ -65,6 +65,12 @@ li input:checked ~ label {
     right: 35%;
   }
 }
-.qw {
-  background-color: #fc685f;
+
+.modal-footer button{
+  min-width: 120px;
+}
+
+//only for delete modal window in edit modal
+.modal .modal-dialog.modal-bottom>.modal-content {
+  bottom: 93px;
 }

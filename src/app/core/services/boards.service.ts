@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {IBoard} from "@shared/interfaces/board.interface";
 
 @Injectable({
@@ -50,14 +50,21 @@ export class BoardsService {
     this.boards.push({...board, boardId: this.boards.length + 1, boardBackground: board.boardBackground})
   }
 
+  editBoard(form): void {
+    this.boards = this.boards.map(item => {
+      if (item.boardId === form.boardId) {
+        return {...item, ...form};
+      }
+      return item;
+    });
+  }
+
   public deleteBoard(boardId: number): void {
-    this.boards = this.boards.filter(function (item) {
-      return item.boardId !== boardId;
-    })
+    this.boards = this.boards.filter(item => item.boardId !== boardId)
   }
 
   public toggleFavorite(board) {
-     this.boards = this.boards.map((item, index) => {
+    this.boards = this.boards.map((item, index) => {
       if (item.boardId === board.boardId) {
         this.boards[index].isFavorite = !board.isFavorite;
       }
