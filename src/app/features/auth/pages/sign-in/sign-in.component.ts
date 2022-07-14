@@ -29,23 +29,23 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.inSignForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required],
+      userEmail: [null, [Validators.required, Validators.email]],
+      userPassword: [null, Validators.required],
     });
   }
 
   get emailForm(): AbstractControl {
-    return this.inSignForm.get('email');
+    return this.inSignForm.get('userEmail');
   }
 
   get passwordForm(): AbstractControl {
-    return this.inSignForm.get('password');
+    return this.inSignForm.get('userPassword');
   }
 
   checkForm(form: IUser): void {
     this.users = this.usersService.getUsers();
-    this.isAlarmEmail = !this.users.find(user => user.email === form.email);
-    this.isAlarmPass = !this.users.find(user => user.password === form.password);
+    this.isAlarmEmail = !this.users.find(user => user.userEmail === form.userEmail);
+    this.isAlarmPass = !this.users.find(user => user.userPassword === form.userPassword);
   }
 
   signIn(): void {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
-import {IBoard} from "@shared/interfaces/board.interface";
+import {IBoards} from "@shared/interfaces/boards.interface";
 import {MDBModalService} from "angular-bootstrap-md";
 import {Subject} from "rxjs";
 
@@ -13,7 +13,7 @@ import {Subject} from "rxjs";
 
 export class BoardAddComponent implements OnInit {
 
-  public boards: IBoard[] = [];
+  public boards: IBoards[] = [];
   public addBoardForm: FormGroup;
   public actionAdd = new Subject<any>();
   public bgBoard = this.boardsService.bgColorBoard;
@@ -29,7 +29,7 @@ export class BoardAddComponent implements OnInit {
       boardId: [''],
       boardBackground: ['#838C91', Validators.required],
       boardName: [null, [Validators.required, Validators.maxLength(15)]],
-      isFavorite: [false],
+      boardFavorite: [false],
     });
   }
 

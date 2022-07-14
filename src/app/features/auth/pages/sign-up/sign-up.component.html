@@ -7,7 +7,7 @@
   <!-- First Name -->
   <div class="md-form">
     <mdb-icon class="prefix form__icon" fas icon="user"></mdb-icon>
-    <input mdbInput mdbValidate formControlName="firstName" type="text" id="firstName"
+    <input mdbInput mdbValidate formControlName="userFirstName" type="text" id="firstName"
            class="form-control">
     <label for="firstName">Type your first name*</label>
     <mdb-error *ngIf="firstNameForm.invalid && (firstNameForm.dirty || firstNameForm.touched)">
@@ -20,7 +20,7 @@
   <!-- Last Name -->
   <div class="md-form">
     <mdb-icon class="prefix form__icon" fas icon="user"></mdb-icon>
-    <input mdbInput mdbValidate formControlName="lastName" type="text" id="lastName"
+    <input mdbInput mdbValidate formControlName="userLastName" type="text" id="lastName"
            class="form-control">
     <label for="lastName">Type your last name*</label>
     <mdb-error *ngIf="lastNameForm.invalid && (lastNameForm.dirty || lastNameForm.touched)">
@@ -33,7 +33,7 @@
   <!-- Email -->
   <div class="md-form">
     <mdb-icon class="prefix form__icon" fas icon="envelope"></mdb-icon>
-    <input mdbInput mdbValidate formControlName="email" type="email"
+    <input mdbInput mdbValidate formControlName="userEmail" type="email"
            class="form-control" id="email">
     <label for="email">Type your email*</label>
     <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
@@ -46,7 +46,7 @@
     <div class="md-form">
       <mdb-icon class="prefix btn-lock form__icon" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
                 [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
-      <input mdbInput mdbValidate formControlName="password" autocomplete="off"
+      <input mdbInput mdbValidate formControlName="userPassword" autocomplete="off"
              [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
       <label for="password">Type your password*</label>
       <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">
@@ -59,7 +59,7 @@
       <mdb-icon class="prefix btn-lock form__icon" fas
                 (click)="$event.stopPropagation(); isHidePassConf = !isHidePassConf"
                 [class.fa-lock]="isHidePassConf" [class.fa-unlock]="!isHidePassConf"></mdb-icon>
-      <input mdbInput mdbValidate formControlName="confirmPassword" autocomplete="off"
+      <input mdbInput mdbValidate formControlName="userConfPassword" autocomplete="off"
              [type]="isHidePassConf ? 'password' : 'text'" class="form-control" id="confirmPassword">
       <label for="confirmPassword">Confirm your password*</label>
       <mdb-error *ngIf="passwordConfForm.invalid && (passwordConfForm.dirty || passwordConfForm.touched)">
@@ -75,7 +75,7 @@
   </div>
   <!-- Submit button -->
   <button mdbBtn color="outline-success" block="true" class="my-4 mx-auto rounded form__btn form__btn--animated" type="submit"
-          (click)="signUp()">Sign Up
+          (click)="signUp(this.upSignForm.value)">Sign Up
   </button>
   <!-- Register -->
   <p class="text-center">Already have an account?

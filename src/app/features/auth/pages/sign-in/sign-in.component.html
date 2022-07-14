@@ -9,7 +9,7 @@
     <div [ngSwitch]="emailForm.status">
       <mdb-icon class="prefix form__icon" fas icon="envelope-circle-check" *ngSwitchCase="'VALID'"></mdb-icon>
       <mdb-icon class="prefix form__icon" fas icon="envelope" *ngSwitchDefault></mdb-icon>
-      <input mdbInput formControlName="email" type="email"
+      <input mdbInput formControlName="userEmail" type="email"
              class="form-control mb-4" id="email">
       <label for="email">Type your email*</label>
       <mdb-error *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)">
@@ -21,7 +21,7 @@
     <div class="md-form">
       <mdb-icon class="prefix btn-lock form__icon" fas (click)="$event.stopPropagation(); isHidePass = !isHidePass"
                 [class.fa-lock]="isHidePass" [class.fa-unlock]="!isHidePass"></mdb-icon>
-      <input mdbInput formControlName="password" autocomplete="off"
+      <input mdbInput formControlName="userPassword" autocomplete="off"
              [type]="isHidePass ? 'password' : 'text'" class="form-control" id="password">
       <label for="password">Type your password*</label>
       <mdb-error *ngIf="passwordForm.invalid && (passwordForm.dirty || passwordForm.touched)">

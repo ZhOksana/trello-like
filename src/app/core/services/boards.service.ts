@@ -1,29 +1,33 @@
 import {Injectable} from '@angular/core';
-import {IBoard} from "@shared/interfaces/board.interface";
+import {IBoards} from "@shared/interfaces/boards.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardsService {
 
-  private boards: IBoard[] = [
+  private boards: IBoards[] = [
     {
       boardId: 0,
       boardName: "Work",
       boardBackground: "#D29034",
-      isFavorite: false,
+      boardFavorite: false,
+      boardColumn: [{columnId: 1, columnName: "1", columnTask: []}
+      ]
     },
     {
       boardId: 1,
       boardName: "Home",
       boardBackground: "#519839",
-      isFavorite: true,
+      boardFavorite: true,
+      boardColumn: [],
     },
     {
       boardId: 2,
       boardName: "Family",
       boardBackground: "#4BBF6B",
-      isFavorite: false,
+      boardFavorite: false,
+      boardColumn: [],
     },
   ];
 
@@ -38,16 +42,16 @@ export class BoardsService {
     {boardBackground: "#0067A3"},
   ];
 
-  public getBoards(): IBoard[] {
+  public getBoards(): IBoards[] {
     return this.boards;
   }
 
-  public getBoardById(id): IBoard {
+  public getBoardById(id): IBoards {
     return this.boards.filter(item => item.boardId === id)[0];
   }
 
   public addBoard(board: any): void {
-    this.boards.push({...board, boardId: this.boards.length + 1, boardBackground: board.boardBackground})
+    this.boards.push({...board, boardId: this.boards.length, boardBackground: board.boardBackground})
   }
 
   editBoard(form): void {
@@ -66,7 +70,7 @@ export class BoardsService {
   public toggleFavorite(board) {
     this.boards = this.boards.map((item, index) => {
       if (item.boardId === board.boardId) {
-        this.boards[index].isFavorite = !board.isFavorite;
+        this.boards[index].boardFavorite = !board.boardFavorite;
       }
       return item;
     });

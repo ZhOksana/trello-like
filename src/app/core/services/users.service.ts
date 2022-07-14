@@ -7,18 +7,20 @@ import {IUser} from "@shared/interfaces/user.interface";
 export class UsersService {
   private users: IUser[] = [
     {
-      email: "admin@mail.com",
-      password: "1111",
-      confirmPassword: "1111",
-      userId: "0",
-      role: "0"
+      userId: 0,
+      userEmail: "admin@mail.com",
+      userPassword: "1111",
+      userConfPassword: "1111",
+      userFirstName: "John",
+      userLastName: "Snow",
     },
     {
-      email: "user@mail.com",
-      password: "2222",
-      confirmPassword: "2222",
-      userId: "0",
-      role: "0"
+      userId: 1,
+      userEmail: "user@mail.com",
+      userPassword: "2222",
+      userConfPassword: "2222",
+      userFirstName: "Elizabet",
+      userLastName: "Lancaster",
     },
   ];
 
@@ -26,5 +28,8 @@ export class UsersService {
     return this.users;
   }
 
+  public addUser(user: any): void {
+    this.users.push({...user, userId: this.users.length})
+  }
 }
 
