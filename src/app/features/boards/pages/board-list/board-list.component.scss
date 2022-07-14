@@ -1,0 +1,104 @@
+.container {
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Segoe UI, Roboto, sans-serif;
+}
+
+.boards__header {
+  min-width: 100%;
+  font-weight: 500;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
+.board {
+  &__name {
+    user-select: none;
+  }
+
+  &__list {
+    display: block;
+    height: 90px;
+    width: 160px;
+    border-radius: 3px;
+
+    &:hover {
+      .board__btn {
+        display: block;
+      }
+
+      .board__name {
+        z-index: 20;
+      }
+    }
+  }
+
+  &__link {
+    z-index: 10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #00000026;
+    }
+  }
+
+  &__content {
+    position: relative;
+    height: 100%;
+  }
+
+  &__btn {
+    padding: 4px 8px;
+    z-index: 20;
+    display: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  &__name {
+    position: relative;
+    top: 7px;
+    left: 7px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__btn-add {
+    position: relative;
+    border: none;
+    background-color: rgba(9, 31, 68, 0.08);
+    color: #172b4d;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 0 10px 28px;
+
+    &:hover {
+      background-color: rgba(9, 30, 66, 0.11);
+    }
+
+    &-icon {
+      position: absolute;
+      top: 44px;
+      left: 16px;
+    }
+  }
+}
+
+.favorite {
+  color: gold;
+}

@@ -1,44 +1,48 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IUsers} from "@shared/interfaces/users.interface";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {IUser} from "@shared/interfaces/user.interface";
 import {UsersService} from "@core/services/users.service";
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: [
+    '../../../../styles/auth.scss',
+    './sign-in.component.scss'
+  ]
 })
-export class SignInComponent {
-  private usersService: UsersService;
-  public users: IUsers[] = [];
+
+export class SignInComponent implements OnInit {
+
+  public users: IUser[] = [];
   public inSignForm: FormGroup;
   public isHidePass: boolean = true;
   public isAlarmForm: boolean = false;
   public isAlarmEmail: boolean = false;
   public isAlarmPass: boolean = false;
 
-  constructor(public fb: FormBuilder, private router: Router) {
-    this.usersService = new UsersService();
-    this._createForm()
+  constructor(public fb: FormBuilder,
+              private router: Router,
+              private usersService: UsersService) {
   }
 
-  private _createForm() {
+  ngOnInit() {
     this.inSignForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
       password: [null, Validators.required],
     });
   }
 
-  get emailForm() {
+  get emailForm(): AbstractControl {
     return this.inSignForm.get('email');
   }
 
-  get passwordForm() {
+  get passwordForm(): AbstractControl {
     return this.inSignForm.get('password');
   }
 
-  checkForm(form: IUsers): void {
+  checkForm(form: IUser): void {
     this.users = this.usersService.getUsers();
     this.isAlarmEmail = !this.users.find(user => user.email === form.email);
     this.isAlarmPass = !this.users.find(user => user.password === form.password);
