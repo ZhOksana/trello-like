@@ -44,7 +44,6 @@ export class BoardEditComponent implements OnInit {
     this.board = this.boardsService.getBoardById(id);
     this.actionEdit.next(id);
     this.editBoardForm.patchValue(this.board);
-
   }
 
   editBoard(form) {

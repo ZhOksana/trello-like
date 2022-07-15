@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BoardComponent} from "./pages/board/board.component";
 import {BoardRoutingModule} from "./board-routing.module";
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {BoardRoutingModule} from "./board-routing.module";
   ],
   imports: [
     CommonModule,
-    BoardRoutingModule
+    BoardRoutingModule,
+    DragDropModule
   ]
 })
 export class BoardModule { }

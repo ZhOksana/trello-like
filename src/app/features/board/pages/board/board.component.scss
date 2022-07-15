@@ -1,0 +1,37 @@
+.container {
+  max-width: 1000px;
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Segoe UI, Roboto, sans-serif;
+}
+
+ul {
+
+  padding-inline-start: 0;
+}
+
+.list{
+  border: #03a9f4 solid 1px;
+}
+.nested__list {
+  border: #37f403 solid 1px;
+}
+ul {
+
+}
+li{
+  list-style-type: none;
+}
+
+
+.list {
+  display: block;
+  width: 200px;
+  height: 140px;
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  transition: transform 100ms cubic-bezier(.17,.67,.87,.54);
+}
+
+

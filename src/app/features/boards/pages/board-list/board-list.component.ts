@@ -61,7 +61,6 @@ export class BoardListComponent {
     this.modalRef.content.actionEdit.pipe(take(1)).subscribe(() => {
       this.getBoards();
     });
-
   }
 
   toggleFavorite(board): void {

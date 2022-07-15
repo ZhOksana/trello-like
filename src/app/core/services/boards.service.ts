@@ -12,7 +12,32 @@ export class BoardsService {
       boardName: "Work",
       boardBackground: "#D29034",
       boardFavorite: false,
-      boardColumn: [{columnId: 1, columnName: "1", columnTask: []}
+      boardColumn: [
+        {
+          columnId: 0,
+          columnName: "To do",
+          columnTask: [
+            {
+              taskId: 0,
+              taskName: "Contact with Mike",
+              taskDesc: "Tell him about my new project",
+              taskTag: [],
+              taskDate: "unknown",
+              taskBackground: "blue",
+              taskUser: [],
+            },
+          ],
+        },
+        {
+          columnId: 1,
+          columnName: "Not started",
+          columnTask: [],
+        },
+        {
+          columnId: 2,
+          columnName: "Finished",
+          columnTask: [],
+        },
       ]
     },
     {
@@ -20,14 +45,85 @@ export class BoardsService {
       boardName: "Home",
       boardBackground: "#519839",
       boardFavorite: true,
-      boardColumn: [],
+      boardColumn: [
+        {
+          columnId: 0,
+          columnName: "Routine",
+          columnTask: [],
+        },
+        {
+          columnId: 1,
+          columnName: "Planned",
+          columnTask: [
+            {
+              taskId: 0,
+              taskName: "Travel in Monaco",
+              taskDesc: "Planned travel for me and my wife when I can take a vacation",
+              taskTag: [],
+              taskDate: "unknown",
+              taskBackground: "red",
+              taskUser: [],
+            },
+          ],
+        },
+        {
+          columnId: 2,
+          columnName: "Need to buy",
+          columnTask: [],
+        },
+      ],
     },
     {
       boardId: 2,
       boardName: "Family",
       boardBackground: "#4BBF6B",
       boardFavorite: false,
-      boardColumn: [],
+      boardColumn: [
+        {
+          columnId: 0,
+          columnName: "Common",
+          columnTask: [],
+        },
+        {
+          columnId: 1,
+          columnName: "John",
+          columnTask: [
+            {
+              taskId: 3,
+              taskName: "Clean my car",
+              taskDesc: "I want to clean my car inside",
+              taskTag: [],
+              taskDate: "unknown",
+              taskBackground: "purple",
+              taskUser: [],
+            },
+          ],
+        },
+        {
+          columnId: 2,
+          columnName: "Elizabet",
+          columnTask: [
+            {
+              taskId: 0,
+              taskName: "Buy a new dress",
+              taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
+              taskTag: [],
+              taskDate: "unknown",
+              taskBackground: "purple",
+              taskUser: [],
+            },
+            {
+              taskId: 1,
+              taskName: "Go to hospital",
+              taskDesc: "My headache is growing, need to go to hospital",
+              taskTag: [],
+              taskDate: "unknown",
+              taskBackground: "purple",
+              taskUser: [],
+            },
+          ],
+        },
+      ],
     },
   ];
 
