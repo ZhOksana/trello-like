@@ -7,7 +7,7 @@ import {IUser} from "@shared/interfaces/user.interface";
 export class UsersService {
   private users: IUser[] = [
     {
-      userId: 0,
+      userId: 1,
       userEmail: "admin@mail.com",
       userPassword: "1111",
       userConfPassword: "1111",
@@ -15,7 +15,7 @@ export class UsersService {
       userLastName: "Snow",
     },
     {
-      userId: 1,
+      userId: 2,
       userEmail: "user@mail.com",
       userPassword: "2222",
       userConfPassword: "2222",
@@ -29,7 +29,7 @@ export class UsersService {
   }
 
   public addUser(user: any): void {
-    this.users.push({...user, userId: this.users.length})
+    this.users.push({...user, userId: this.users.length + 1})
   }
 }
 

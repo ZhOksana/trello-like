@@ -30,6 +30,7 @@ export class BoardAddComponent implements OnInit {
       boardBackground: ['#838C91', Validators.required],
       boardName: [null, [Validators.required, Validators.maxLength(15)]],
       boardFavorite: [false],
+      boardColumn: [[]],
     });
   }
 

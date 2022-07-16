@@ -8,17 +8,17 @@ export class BoardsService {
 
   private boards: IBoards[] = [
     {
-      boardId: 0,
+      boardId: 1,
       boardName: "Work",
       boardBackground: "#D29034",
       boardFavorite: false,
       boardColumn: [
         {
-          columnId: 0,
+          columnId: 101,
           columnName: "To do",
           columnTask: [
             {
-              taskId: 0,
+              taskId: 1001,
               taskName: "Contact with Mike",
               taskDesc: "Tell him about my new project",
               taskTag: [],
@@ -29,34 +29,34 @@ export class BoardsService {
           ],
         },
         {
-          columnId: 1,
+          columnId: 102,
           columnName: "Not started",
           columnTask: [],
         },
         {
-          columnId: 2,
+          columnId: 103,
           columnName: "Finished",
           columnTask: [],
         },
       ]
     },
     {
-      boardId: 1,
+      boardId: 2,
       boardName: "Home",
       boardBackground: "#519839",
       boardFavorite: true,
       boardColumn: [
         {
-          columnId: 0,
+          columnId: 104,
           columnName: "Routine",
           columnTask: [],
         },
         {
-          columnId: 1,
+          columnId: 105,
           columnName: "Planned",
           columnTask: [
             {
-              taskId: 0,
+              taskId: 1002,
               taskName: "Travel in Monaco",
               taskDesc: "Planned travel for me and my wife when I can take a vacation",
               taskTag: [],
@@ -67,29 +67,29 @@ export class BoardsService {
           ],
         },
         {
-          columnId: 2,
+          columnId: 106,
           columnName: "Need to buy",
           columnTask: [],
         },
       ],
     },
     {
-      boardId: 2,
+      boardId: 3,
       boardName: "Family",
       boardBackground: "#4BBF6B",
       boardFavorite: false,
       boardColumn: [
         {
-          columnId: 0,
+          columnId: 107,
           columnName: "Common",
           columnTask: [],
         },
         {
-          columnId: 1,
+          columnId: 108,
           columnName: "John",
           columnTask: [
             {
-              taskId: 3,
+              taskId: 1003,
               taskName: "Clean my car",
               taskDesc: "I want to clean my car inside",
               taskTag: [],
@@ -100,11 +100,11 @@ export class BoardsService {
           ],
         },
         {
-          columnId: 2,
+          columnId: 109,
           columnName: "Elizabet",
           columnTask: [
             {
-              taskId: 0,
+              taskId: 1004,
               taskName: "Buy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
@@ -113,7 +113,7 @@ export class BoardsService {
               taskUser: [],
             },
             {
-              taskId: 1,
+              taskId: 1005,
               taskName: "Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
@@ -147,7 +147,7 @@ export class BoardsService {
   }
 
   public addBoard(board: any): void {
-    this.boards.push({...board, boardId: this.boards.length, boardBackground: board.boardBackground})
+    this.boards.push({...board, boardId: this.boards.length + 1, boardBackground: board.boardBackground})
   }
 
   editBoard(form): void {
