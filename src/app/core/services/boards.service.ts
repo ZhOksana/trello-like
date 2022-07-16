@@ -171,4 +171,8 @@ export class BoardsService {
       return item;
     });
   }
+
+  public addColumn(board: any): void {
+    this.boards.push({...board.boardColumn, columnId: board.boardColumn.length + 1, boardBackground: board.boardBackground})
+  }
 }
