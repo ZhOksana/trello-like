@@ -6,7 +6,6 @@ import {ActivatedRoute} from "@angular/router";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
@@ -15,8 +14,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class BoardComponent implements OnInit {
   public board: IBoards;
-  public idBoard: number;
+  public idBoard: string;
   public addColumnItem: FormGroup;
+  public addTaskItem: FormGroup;
+  public isAddColumn: boolean = false;
+  public isAddTask: string = null;
 
   constructor(private modalService: MDBModalService,
               private boardsService: BoardsService,
@@ -27,17 +29,25 @@ export class BoardComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.addColumnItem = this.fb.group({
-        columnId: [''],
-        columnName: [null, [Validators.required, Validators.maxLength(15)]],
-        columnTask: [[]],
-      });
-    this.idBoard = +this.route.snapshot.paramMap.get('boardId');
+    this.addColumnItem = this.fb.group({
+      columnId: [''],
+      columnName: [null, Validators.required],
+      columnTask: [[]],
+    });
+    this.addTaskItem = this.fb.group({
+      taskId: [''],
+      taskName: [null, Validators.required],
+      taskDesc: [''],
+      taskTag: [[]],
+      taskDate: [''],
+      taskBackground: [''],
+      taskUser: [[]]
+    });
+    this.idBoard = this.route.snapshot.paramMap.get('boardId');
     this.board = this.boardsService.getBoardById(this.idBoard);
   }
 
   drop(event: CdkDragDrop<any[]>) {
-   /* console.log(event)*/
     if (event.container === event.previousContainer) {
       moveItemInArray(
         event.container.data,
@@ -52,8 +62,18 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  addColumn() {
-    console.log(this.boardsService.getBoardById(this.idBoard))
+  addColumn(board) {
+    if (this.addColumnItem.valid) {
+      this.isAddColumn = !this.isAddColumn;
+      this.boardsService.addColumn(board, this.idBoard);
+      this.addTaskItem.reset();
+    }
+  }
 
+  addTask(board, idColumn) {
+    this.isAddTask = null;
+    this.boardsService.addTask(board, idColumn, this.idBoard);
+    this.addTaskItem.reset();
+    console.log(this.boardsService.getBoards());
   }
 }

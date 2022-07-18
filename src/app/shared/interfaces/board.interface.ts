@@ -1,7 +1,7 @@
 import {ITask} from "@shared/interfaces/task.interface";
 
 export interface IBoard {
-  columnId: number,
+  columnId: string,
   columnName: string,
   columnTask : ITask[],
 }

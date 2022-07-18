@@ -28,7 +28,7 @@ export class BoardEditComponent implements OnInit {
 
   ngOnInit() {
     this.editBoardForm = this.fb.group({
-      boardId: [],
+      boardId: [''],
       boardBackground: [Validators.required],
       boardName: ['', [Validators.required, Validators.maxLength(15)]],
       boardFavorite: [],

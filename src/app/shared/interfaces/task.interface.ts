@@ -2,7 +2,7 @@ import {IUser} from "@shared/interfaces/user.interface";
 import {ITag} from "@shared/interfaces/tag.interface";
 
 export interface ITask {
-  taskId: number,
+  taskId: string,
   taskName: string,
   taskDesc: string,
   taskTag: ITag[],

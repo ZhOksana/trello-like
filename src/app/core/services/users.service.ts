@@ -7,7 +7,7 @@ import {IUser} from "@shared/interfaces/user.interface";
 export class UsersService {
   private users: IUser[] = [
     {
-      userId: 1,
+      userId: "1",
       userEmail: "admin@mail.com",
       userPassword: "1111",
       userConfPassword: "1111",
@@ -15,7 +15,7 @@ export class UsersService {
       userLastName: "Snow",
     },
     {
-      userId: 2,
+      userId: "2",
       userEmail: "user@mail.com",
       userPassword: "2222",
       userConfPassword: "2222",
