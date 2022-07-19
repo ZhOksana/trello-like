@@ -57,7 +57,7 @@
     <!-- Confirm password -->
     <div class="md-form">
       <mdb-icon class="prefix btn-lock form__icon" fas
-                (click)="$event.stopPropagation(); isHidePassConf = !isHidePassConf"
+                (click)="isHidePassConf = !isHidePassConf"
                 [class.fa-lock]="isHidePassConf" [class.fa-unlock]="!isHidePassConf"></mdb-icon>
       <input mdbInput mdbValidate formControlName="userConfPassword" autocomplete="off"
              [type]="isHidePassConf ? 'password' : 'text'" class="form-control" id="confirmPassword">

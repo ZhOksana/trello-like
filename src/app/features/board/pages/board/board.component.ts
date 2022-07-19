@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBoards} from "@shared/interfaces/boards.interface";
 import {MDBModalService} from "angular-bootstrap-md";
 import {BoardsService} from "@core/services/boards.service";
@@ -78,12 +78,26 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  scrollButton(id) {
+  scrollTaskList(id) {
     this.toggleAddTask = id;
     setTimeout(() => {
       let scrollElement: Element = document.getElementsByClassName(`task__container-${id}`)[0];
       scrollElement.scrollTop = scrollElement.scrollHeight + 87;
     }, 0)
-
   }
+
+  toggleAddColumnForm() {
+    if (this.isAddColumn === true && this.addColumnItem.touched === true) {
+      this.isAddColumn = !this.isAddColumn;
+      this.addColumnItem.reset();
+    }
+  }
+
+  toggleAddTaskForm() {
+    if (this.toggleAddTask !== null && this.addTaskItem.touched === true) {
+      this.toggleAddTask = null;
+      this.addTaskItem.reset();
+    }
+  }
+
 }

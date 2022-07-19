@@ -12,27 +12,32 @@ p {
 }
 
 .column {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   margin: 0;
   padding: 0;
   height: 90vh;
   width: 100vw;
+
   &::-webkit-scrollbar {
     width: 12px;
-
   }
+
   &::-webkit-scrollbar-track {
     background: rgba(185, 189, 197, 0.4);
     border-radius: 6px;
   }
+
   &::-webkit-scrollbar-thumb {
     border-radius: 6px;
     background: rgba(185, 189, 197, 0.8);
   }
+
   &::-webkit-scrollbar-thumb:hover {
     background: rgba(185, 189, 197, 1);
   }
+
   &::-webkit-scrollbar-button {
     display: block;
     height: 20px;
@@ -46,7 +51,6 @@ p {
     width: 272px;
     background-color: #ebecf0;
     border-radius: 3px;
-
   }
 
   &__item {
@@ -82,14 +86,15 @@ p {
       transition: margin 85ms ease-in, background 85ms ease-in;
       width: 100%;
     }
-
   }
 
   &__add-btn {
+    position: relative;
     height: 40px;
     color: white;
     border: none;
     background-color: rgba(235, 236, 240, 0.40);
+
     &:hover {
       background-color: rgba(226, 228, 234, 0.50);
     }
@@ -102,18 +107,22 @@ p {
 
 .task {
   &__container {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     max-height: 70vh;
+
     &::-webkit-scrollbar {
       width: 7px;
     }
+
     &::-webkit-scrollbar-track {
       background: rgba(185, 189, 197, 0.4);
     }
+
     &::-webkit-scrollbar-thumb {
       background: rgba(185, 189, 197, 0.8);
     }
+
     &::-webkit-scrollbar-thumb:hover {
       background: rgba(185, 189, 197, 1);
     }
@@ -190,8 +199,3 @@ p {
     background-color: rgba(226, 228, 234, 0.5);
   }
 }
-
-
-
-
-
