@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {IBoards} from "@shared/interfaces/boards.interface";
 import {MDBModalService} from "angular-bootstrap-md";
 import {BoardsService} from "@core/services/boards.service";
@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
   public addColumnItem: FormGroup;
   public addTaskItem: FormGroup;
   public isAddColumn: boolean = false;
-  public isAddTask: string = null;
+  public toggleAddTask: string = null;
 
   constructor(private modalService: MDBModalService,
               private boardsService: BoardsService,
@@ -66,14 +66,24 @@ export class BoardComponent implements OnInit {
     if (this.addColumnItem.valid) {
       this.isAddColumn = !this.isAddColumn;
       this.boardsService.addColumn(board, this.idBoard);
-      this.addTaskItem.reset();
+      this.addColumnItem.reset();
     }
   }
 
   addTask(board, idColumn) {
-    this.isAddTask = null;
-    this.boardsService.addTask(board, idColumn, this.idBoard);
-    this.addTaskItem.reset();
-    console.log(this.boardsService.getBoards());
+    if (this.addTaskItem.valid) {
+      this.toggleAddTask = null;
+      this.boardsService.addTask(board, idColumn, this.idBoard);
+      this.addTaskItem.reset();
+    }
+  }
+
+  scrollButton(id) {
+    this.toggleAddTask = id;
+    setTimeout(() => {
+      let scrollElement: Element = document.getElementsByClassName(`task__container-${id}`)[0];
+      scrollElement.scrollTop = scrollElement.scrollHeight + 87;
+    }, 0)
+
   }
 }

@@ -1,4 +1,6 @@
-<div class="column">
+<div class="column"
+     [style.background-color]="board.boardBackground"
+>
   <!-- Column container -->
   <ul class="mt-4 d-flex"
       cdkDropList
@@ -9,7 +11,7 @@
       (cdkDropListDropped)="drop($event)"
   >
     <!-- Column list -->
-    <div *ngFor="let itemColumn of board.boardColumn, let i = index" class="m-2 z-depth-1 column__container" cdkDrag>
+    <div *ngFor="let itemColumn of board.boardColumn" class="m-2 z-depth-1 column__container" cdkDrag>
       <li class="p-2 z-depth-1 column__item">
         <!-- Column name -->
         <p class="px-2 column__name" cdkDragHandle>{{itemColumn.columnName}}</p>
@@ -17,7 +19,8 @@
         <ul cdkDropList
             [cdkDropListData]="itemColumn.columnTask"
             (cdkDropListDropped)="drop($event)"
-            class="task__container"
+            class="task__container task__container-{{itemColumn.columnId}}"
+            [class.task__container--mb]="toggleAddTask !== itemColumn.columnId"
         >
           <!-- Task list -->
           <li *ngFor="let taskColumn of itemColumn.columnTask" class="m-2 p-2 task__item z-depth-1" cdkDrag>
@@ -27,23 +30,23 @@
           <!-- Task addition form -->
           <form [formGroup]="addTaskItem" class="task__form">
             <!-- Button view - new task -->
-            <div *ngIf="isAddTask !== itemColumn.columnId">
+            <div *ngIf="toggleAddTask !== itemColumn.columnId">
               <button class="task__item task__add-btn"
-                      (click)="isAddTask = itemColumn.columnId">
+                      (click)="scrollButton(itemColumn.columnId)">
                 <mdb-icon class="fa" fas icon="plus" style="color: #172b4d;"></mdb-icon>
                 Add a new task
               </button>
             </div>
             <!-- Form view - new task -->
-            <div *ngIf="isAddTask === itemColumn.columnId" class="p-2 m-2 task__form--switch">
+            <div *ngIf="toggleAddTask === itemColumn.columnId" class="pb-0 mb-0 px-1 mx-1 mt-2">
               <input mdbInput formControlName="taskName" autocomplete="off"
                      type="text" class="form-control mb-1" placeholder="Enter task name"
-                     *ngIf="isAddTask" [id]="i">
+                     *ngIf="toggleAddTask">
               <div class="d-flex justify-content-start">
                 <button type="submit" mdbBtn color="primary" class="m-1 p-2 waves-light relative rounded task__sub-btn"
                         (click)="addTask(addTaskItem.value, itemColumn.columnId)">Add a task
                 </button>
-                <button type="button" class="ml-2 close" aria-label="Close" (click)="isAddTask = null">
+                <button type="button" class="ml-2 close" aria-label="Close" id="top" (click)="toggleAddTask = null">
                   <mdb-icon class="prefix task__form__icon" fas icon="times"></mdb-icon>
                 </button>
               </div>
@@ -58,7 +61,7 @@
       <div *ngIf="!isAddColumn">
         <button class="m-2 column__item column__add-btn"
                 (click)="isAddColumn = !isAddColumn">
-          <mdb-icon class="fa" fas icon="plus" style="color: #172b4d;"></mdb-icon>
+          <mdb-icon class="fa" fas icon="plus" style="color: rgba(255, 255, 255, 0.8);"></mdb-icon>
           Add а new column
         </button>
       </div>
@@ -72,7 +75,7 @@
                   (click)="addColumn(addColumnItem.value)">Add a column
           </button>
           <button type="button" class="ml-2 close" aria-label="Close" (click)="isAddColumn = !isAddColumn">
-            <mdb-icon class="prefix form__icon" fas icon="times"></mdb-icon>
+            <mdb-icon class="prefix" fas icon="times"></mdb-icon>
           </button>
         </div>
       </div>
