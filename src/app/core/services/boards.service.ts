@@ -272,8 +272,8 @@ export class BoardsService {
     });
   }
 
-  public deleteBoard(boardId: string): void {
-    this.boards = this.boards.filter(item => item.boardId !== boardId)
+  public deleteBoard(id: string): void {
+    this.boards = this.boards.filter(item => item.boardId !== id)
   }
 
   public toggleFavorite(board): void {
@@ -287,11 +287,26 @@ export class BoardsService {
 
   public addColumn(board: IBoard, id: string): void {
     let randomId = getUniqueID();
-    let filterBoard = this.boards.filter(column => column.boardId == id)
+    let filterBoard = this.boards.filter(item => item.boardId == id)
     filterBoard[0].boardColumn.push({...board, columnId: randomId, columnTask: []})
   }
 
-  public addTask(task: ITask, idColumn: string, idBoard: string ): void {
+  editColumn(form, id): void {
+    console.log("form", form);
+    console.log("idBoard", id);
+    console.log("this.boards", this.boards);
+    let filterBoard = this.boards.filter(item => item.boardId === id)[0].boardColumn
+      .map(item => {
+      if (item.columnId === form.columnId) {
+        return {...item, columnName: form.columnName}
+      } else return item;
+    })
+    console.log(filterBoard)
+
+
+  }
+
+  public addTask(task: ITask, idColumn: string, idBoard: string): void {
     let randomId = getUniqueID();
     let filterBoard = this.boards.filter(column => column.boardId == idBoard)
     let filterColumn = filterBoard[0].boardColumn.filter(task => task.columnId == idColumn)

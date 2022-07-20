@@ -1,6 +1,6 @@
 <div class="column"
      [style.background-color]="board.boardBackground"
-     (click)="toggleAddColumnForm(); toggleAddTaskForm()"
+     (click)="toggleAddColumnForm(); toggleAddTaskForm(); toggleEditColumnForm()"
 >
   <!-- Column container -->
   <ul class="mt-4 d-flex"
@@ -14,8 +14,42 @@
     <!-- Column list -->
     <div *ngFor="let itemColumn of board.boardColumn" class="m-2 z-depth-1 column__container" cdkDrag>
       <li class="p-2 z-depth-1 column__item">
-        <!-- Column name -->
-        <p class="px-2 column__name" cdkDragHandle>{{itemColumn.columnName}}</p>
+        <div class="column__header__wrapper"></div>
+        <div class="m-0 d-flex align-items-center column__header__container">
+          <form [formGroup]="editColumnItem" class="w-100" (click)="$event.stopPropagation()">
+            <!-- Button view - name of column -->
+            <!-- Edit button -->
+            <a class="column__header__container"
+               (click)="editColumnButton(itemColumn.columnId); editColumnItem.patchValue(itemColumn)">
+              <div *ngIf="toggleEditColumn !== itemColumn.columnId"
+                   class="d-flex justify-content-between column__header__content">
+                <!-- Column name -->
+                <p class="px-2 column__name" cdkDragHandle>{{itemColumn.columnName}}</p>
+              </div>
+            </a>
+            <!-- Form view - edit column -->
+            <div *ngIf="toggleEditColumn === itemColumn.columnId"
+                 class="p-0 m-0 d-flex justify-content-between align-items-baseline column__header column__header__content">
+              <input mdbInput formControlName="columnName" autocomplete="off"
+                     type="text" class="form-control m-0" placeholder="Enter task name"
+                     *ngIf="toggleEditColumn" appAutoFocus style="  font-size: 18px;  font-weight: 500;">
+              <a type="submit" mdbBtn color="primary"
+                 class="my-0 ml-2 mr-0 p-2 waves-light relative rounded task__sub-btn"
+                 style="height: 32px" (click)="editColumn(this.editColumnItem.value)">
+                <mdb-icon class="fa" fas icon="edit"></mdb-icon>
+              </a>
+              <a type="submit" mdbBtn style="background-color: indianred; height: 32px"
+                 class="my-0 ml-1 mr-0 p-2 waves-light relative rounded task__sub-btn"
+              >
+                <mdb-icon class="fa" fas icon="trash"></mdb-icon>
+              </a>
+              <a type="button" class="ml-2 close align-self-start" aria-label="Close" id="top1"
+                 style="height: 38px" (click)="toggleEditColumn = null">
+                <mdb-icon class="prefix task__form__icon" fas icon="times"></mdb-icon>
+              </a>
+            </div>
+          </form>
+        </div>
         <!-- Task container -->
         <ul cdkDropList
             [cdkDropListData]="itemColumn.columnTask"
@@ -42,7 +76,7 @@
             <div *ngIf="toggleAddTask === itemColumn.columnId" class="pb-0 mb-0 px-1 mx-1 mt-2">
               <input mdbInput formControlName="taskName" autocomplete="off"
                      type="text" class="form-control mb-1" placeholder="Enter task name"
-                     *ngIf="toggleAddTask" appAutoFocus>
+                     appAutoFocus>
               <div class="d-flex justify-content-start">
                 <button type="submit" mdbBtn color="primary" class="m-1 p-2 waves-light relative rounded task__sub-btn"
                         (click)="addTask(addTaskItem.value, itemColumn.columnId)">Add a task
@@ -71,7 +105,7 @@
       <div *ngIf="isAddColumn" class="p-2 m-2 column__form--switch" (click)="$event.stopPropagation()">
         <input mdbInput formControlName="columnName" autocomplete="off"
                type="text" class="form-control mb-1" placeholder="Enter column name"
-               *ngIf="isAddColumn" appAutoFocus>
+               appAutoFocus>
         <div class="d-flex justify-content-start">
           <button type="submit" mdbBtn color="primary" class="m-1 p-2 waves-light relative rounded column__sub-btn"
                   (click)="$event.stopPropagation(); addColumn(addColumnItem.value)">Add a column

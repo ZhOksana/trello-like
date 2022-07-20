@@ -16,9 +16,11 @@ export class BoardComponent implements OnInit {
   public board: IBoards;
   public idBoard: string;
   public addColumnItem: FormGroup;
+  public editColumnItem: FormGroup;
   public addTaskItem: FormGroup;
   public isAddColumn: boolean = false;
   public toggleAddTask: string = null;
+  public toggleEditColumn: string = null;
 
   constructor(private modalService: MDBModalService,
               private boardsService: BoardsService,
@@ -42,6 +44,11 @@ export class BoardComponent implements OnInit {
       taskDate: [''],
       taskBackground: [''],
       taskUser: [[]]
+    });
+    this.editColumnItem = this.fb.group({
+      columnId: [''],
+      columnName: [null, Validators.required],
+      columnTask: [[]],
     });
     this.idBoard = this.route.snapshot.paramMap.get('boardId');
     this.board = this.boardsService.getBoardById(this.idBoard);
@@ -78,7 +85,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  scrollTaskList(id) {
+  scrollTaskList(id: string) {
     this.toggleAddTask = id;
     setTimeout(() => {
       let scrollElement: Element = document.getElementsByClassName(`task__container-${id}`)[0];
@@ -94,10 +101,20 @@ export class BoardComponent implements OnInit {
   }
 
   toggleAddTaskForm() {
-    if (this.toggleAddTask !== null && this.addTaskItem.touched === true) {
-      this.toggleAddTask = null;
-      this.addTaskItem.reset();
-    }
+    this.toggleAddTask = null;
+    this.addTaskItem.reset();
   }
 
+  editColumnButton(id: string) {
+    this.toggleEditColumn = id;
+  }
+
+  toggleEditColumnForm() {
+    this.toggleEditColumn = null;
+  }
+
+  editColumn(form) {
+    this.boardsService.editColumn(form, this.idBoard)
+    this.toggleEditColumn = null;
+  }
 }
