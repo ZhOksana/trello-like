@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
   public addColumnItem: FormGroup;
   public editColumnItem: FormGroup;
   public addTaskItem: FormGroup;
-  public isAddColumn: boolean = false;
+  public toggleAddColumn: string = null;
   public toggleAddTask: string = null;
   public toggleEditColumn: string = null;
 
@@ -71,7 +71,7 @@ export class BoardComponent implements OnInit {
 
   addColumn(board) {
     if (this.addColumnItem.valid) {
-      this.isAddColumn = !this.isAddColumn;
+      this.toggleAddColumn = null;
       this.boardsService.addColumn(board, this.idBoard);
       this.addColumnItem.reset();
     }
@@ -93,24 +93,18 @@ export class BoardComponent implements OnInit {
     }, 0)
   }
 
-  toggleAddColumnForm() {
-    if (this.isAddColumn === true && this.addColumnItem.touched === true) {
-      this.isAddColumn = !this.isAddColumn;
-      this.addColumnItem.reset();
-    }
-  }
-
-  toggleAddTaskForm() {
-    this.toggleAddTask = null;
-    this.addTaskItem.reset();
-  }
-
   editColumnButton(id: string) {
     this.toggleEditColumn = id;
   }
 
-  toggleEditColumnForm() {
+  toggleFormView() {
+    this.toggleAddTask = null;
+    this.addTaskItem.reset();
     this.toggleEditColumn = null;
+    if (this.toggleAddColumn === 'true' && this.addColumnItem.touched === true) {
+      this.toggleAddColumn = null;
+      this.addColumnItem.reset();
+    }
   }
 
   editColumn(form) {

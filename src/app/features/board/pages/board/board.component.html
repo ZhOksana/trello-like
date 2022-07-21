@@ -1,6 +1,6 @@
 <div class="column"
      [style.background-color]="board.boardBackground"
-     (click)="toggleAddColumnForm(); toggleAddTaskForm(); toggleEditColumnForm()"
+     (click)="toggleFormView()"
 >
   <!-- Column container -->
   <ul class="mt-4 d-flex"
@@ -29,23 +29,22 @@
             </a>
             <!-- Form view - edit column -->
             <div *ngIf="toggleEditColumn === itemColumn.columnId"
-                 class="p-0 m-0 d-flex justify-content-between align-items-baseline column__header column__header__content">
+                 class="p-0 m-0 d-flex justify-content-between align-items-baseline
+                  column__header column__header__content">
               <input mdbInput formControlName="columnName" autocomplete="off"
-                     type="text" class="form-control m-0" placeholder="Enter task name"
-                     *ngIf="toggleEditColumn" appAutoFocus style="  font-size: 18px;  font-weight: 500;">
+                     type="text" class="form-control m-0" placeholder="Enter column name"
+                     *ngIf="toggleEditColumn" appAutoFocus>
               <a type="submit" mdbBtn color="primary"
-                 class="my-0 ml-2 mr-0 p-2 waves-light relative rounded task__sub-btn"
-                 style="height: 32px" (click)="editColumn(this.editColumnItem.value)">
+                 class="my-0 ml-2 mr-0 p-2 rounded column__header__btn"
+                 style="" (click)="editColumn(this.editColumnItem.value)">
                 <mdb-icon class="fa" fas icon="edit"></mdb-icon>
               </a>
-              <a type="submit" mdbBtn style="background-color: indianred; height: 32px"
-                 class="my-0 ml-1 mr-0 p-2 waves-light relative rounded task__sub-btn"
-              >
+              <a type="submit" mdbBtn class="my-0 ml-1 mr-0 p-2 rounded column__header__btn--del">
                 <mdb-icon class="fa" fas icon="trash"></mdb-icon>
               </a>
-              <a type="button" class="ml-2 close align-self-start" aria-label="Close" id="top1"
-                 style="height: 38px" (click)="toggleEditColumn = null">
-                <mdb-icon class="prefix task__form__icon" fas icon="times"></mdb-icon>
+              <a type="button" class="ml-2 close align-self-start"
+                 (click)="toggleEditColumn = null">
+                <mdb-icon class="column__header__btn--icon" fas icon="times"></mdb-icon>
               </a>
             </div>
           </form>
@@ -58,7 +57,8 @@
             [class.task__container--mb]="toggleAddTask !== itemColumn.columnId"
         >
           <!-- Task list -->
-          <li *ngFor="let taskColumn of itemColumn.columnTask" class="m-2 p-2 task__item z-depth-1" cdkDrag>
+          <li *ngFor="let taskColumn of itemColumn.columnTask"
+              class="m-2 p-2 task__item z-depth-1" cdkDrag>
             <!-- Task name -->
             <p>{{taskColumn.taskName}}</p>
           </li>
@@ -78,12 +78,13 @@
                      type="text" class="form-control mb-1" placeholder="Enter task name"
                      appAutoFocus>
               <div class="d-flex justify-content-start">
-                <button type="submit" mdbBtn color="primary" class="m-1 p-2 waves-light relative rounded task__sub-btn"
+                <button type="submit" mdbBtn color="primary"
+                        class="m-1 p-2 waves-light relative rounded task__sub-btn"
                         (click)="addTask(addTaskItem.value, itemColumn.columnId)">Add a task
                 </button>
-                <button type="button" class="ml-2 close" aria-label="Close" id="top"
-                        (click)="toggleAddTask = null;  this.addTaskItem.reset()">
-                  <mdb-icon class="prefix task__form__icon" fas icon="times"></mdb-icon>
+                <button type="button" class="ml-2 close"
+                        (click)="toggleAddTask = null; this.addTaskItem.reset()">
+                  <mdb-icon class="task__form--icon" fas icon="times"></mdb-icon>
                 </button>
               </div>
             </div>
@@ -94,15 +95,15 @@
     <!-- Column addition form -->
     <form [formGroup]="addColumnItem" class="column__form">
       <!-- Button view - new task -->
-      <div *ngIf="!isAddColumn">
+      <div *ngIf="toggleAddColumn === null">
         <button class="m-2 column__item column__add-btn"
-                (click)="isAddColumn = !isAddColumn">
+                (click)="toggleAddColumn = 'true'">
           <mdb-icon class="fa" fas icon="plus" style="color: rgba(255, 255, 255, 0.8);"></mdb-icon>
           Add а new column
         </button>
       </div>
       <!-- Form view - new column -->
-      <div *ngIf="isAddColumn" class="p-2 m-2 column__form--switch" (click)="$event.stopPropagation()">
+      <div *ngIf="toggleAddColumn" class="p-2 m-2 column__form--switch" (click)="$event.stopPropagation()">
         <input mdbInput formControlName="columnName" autocomplete="off"
                type="text" class="form-control mb-1" placeholder="Enter column name"
                appAutoFocus>
@@ -111,8 +112,8 @@
                   (click)="$event.stopPropagation(); addColumn(addColumnItem.value)">Add a column
           </button>
           <button type="button" class="ml-2 close" aria-label="Close"
-                  (click)="isAddColumn = !isAddColumn; this.addColumnItem.reset();">
-            <mdb-icon class="prefix" fas icon="times"></mdb-icon>
+                  (click)="toggleAddColumn = null; this.addColumnItem.reset();">
+            <mdb-icon class="column__form--cross-icon" fas icon="times"></mdb-icon>
           </button>
         </div>
       </div>
