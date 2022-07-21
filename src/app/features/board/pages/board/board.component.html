@@ -67,9 +67,19 @@
         >
           <!-- Task list -->
           <li *ngFor="let taskColumn of itemColumn.columnTask"
-              class="m-2 p-2 task__item z-depth-1" cdkDrag>
-            <!-- Task name -->
-            <p>{{taskColumn.taskName}}</p>
+              class="m-2 p-2 task__item z-depth-1 task__content" cdkDrag
+          >
+            <!-- Task container -->
+              <!-- Task link -->
+              <a [routerLink]="['board/', taskColumn.taskId]" class="task__link"> </a>
+
+                <!-- Task name -->
+                <p class="task__name">{{taskColumn.taskName}}</p>
+                <!-- Task edit icon -->
+                <span class="pt-1 pl-2 task__icon ">
+                <mdb-icon fas icon="pencil"></mdb-icon>
+                  </span>
+
           </li>
           <!-- Task addition form -->
           <form [formGroup]="addTaskItem" class="task__form" (click)="$event.stopPropagation()">
