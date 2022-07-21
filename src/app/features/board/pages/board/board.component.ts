@@ -21,6 +21,8 @@ export class BoardComponent implements OnInit {
   public toggleAddColumn: string = null;
   public toggleAddTask: string = null;
   public toggleEditColumn: string = null;
+  public toggleDeleteColumn: string = null;
+  public taskLength: number = null
 
   constructor(private modalService: MDBModalService,
               private boardsService: BoardsService,
@@ -93,14 +95,21 @@ export class BoardComponent implements OnInit {
     }, 0)
   }
 
-  editColumnButton(id: string) {
+  editColumnButton(form, id: string) {
     this.toggleEditColumn = id;
+    this.taskLength = this.board.boardColumn.filter(item => item.columnId === form.columnId)
+      .find(item => item.columnId == form.columnId).columnTask.length
+    if(this.taskLength > 0) {
+      this.toggleDeleteColumn = id;
+    }
+    console.log(this.toggleDeleteColumn)
   }
 
   toggleFormView() {
     this.toggleAddTask = null;
     this.addTaskItem.reset();
     this.toggleEditColumn = null;
+    this.toggleDeleteColumn = null;
     if (this.toggleAddColumn === 'true' && this.addColumnItem.touched === true) {
       this.toggleAddColumn = null;
       this.addColumnItem.reset();
@@ -110,5 +119,10 @@ export class BoardComponent implements OnInit {
   editColumn(form) {
     this.boardsService.editColumn(form, this.idBoard)
     this.toggleEditColumn = null;
+  }
+
+  deleteColumn(form) {
+    if (this.taskLength === 0)
+      this.boardsService.deleteColumn(form, this.idBoard)
   }
 }

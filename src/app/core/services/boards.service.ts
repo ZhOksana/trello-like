@@ -292,18 +292,13 @@ export class BoardsService {
   }
 
   editColumn(form, id): void {
-    console.log("form", form);
-    console.log("idBoard", id);
-    console.log("this.boards", this.boards);
-    let filterBoard = this.boards.filter(item => item.boardId === id)[0].boardColumn
-      .map(item => {
-      if (item.columnId === form.columnId) {
-        return {...item, columnName: form.columnName}
-      } else return item;
-    })
-    console.log(filterBoard)
+    this.boards.filter(item => item.boardId === id)[0].boardColumn
+      .find(item => item.columnId === form.columnId).columnName = form.columnName;
+  }
 
-
+  deleteColumn(form, id) {
+    this.boards.filter(item => item.boardId === id)[0].boardColumn =
+      this.boards.filter(item => item.boardId === id)[0].boardColumn.filter(item => item.columnId !== form.columnId);
   }
 
   public addTask(task: ITask, idColumn: string, idBoard: string): void {
