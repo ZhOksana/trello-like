@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule,Routes} from '@angular/router';
-import {AppRoutes} from "@shared/enums/app-routes";
 import {MainContainerComponent} from "@core/components/main-container/main-container.component";
 import {AuthContainerComponent} from "@core/components/auth-container/auth-container.component";
 
@@ -26,7 +25,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: AppRoutes.AUTH,
+    path: 'auth',
     component: AuthContainerComponent,
     // canActivate: [logOutUserGuard], // @todo  look how make guard
     children: [

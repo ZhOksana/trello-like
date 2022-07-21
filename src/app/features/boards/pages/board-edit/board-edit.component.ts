@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BoardsService} from "@core/services/boards.service";
-import {IBoard} from "@shared/interfaces/board.interface";
+import {IBoards} from "@shared/interfaces/boards.interface";
 import {MDBModalService} from "angular-bootstrap-md";
 import {Subject} from "rxjs";
 
@@ -18,7 +18,7 @@ export class BoardEditComponent implements OnInit {
   public editBoardForm: FormGroup;
   public actionEdit = new Subject<any>();
   public bgBoard = this.boardsService.bgColorBoard;
-  public board: IBoard;
+  public board: IBoards;
 
   constructor(public fb: FormBuilder,
               private modalService: MDBModalService,
@@ -28,10 +28,10 @@ export class BoardEditComponent implements OnInit {
 
   ngOnInit() {
     this.editBoardForm = this.fb.group({
-      boardId: [],
+      boardId: [''],
       boardBackground: [Validators.required],
       boardName: ['', [Validators.required, Validators.maxLength(15)]],
-      isFavorite: [],
+      boardFavorite: [],
     });
     this.getBoardById(this.id);
   }
@@ -44,7 +44,6 @@ export class BoardEditComponent implements OnInit {
     this.board = this.boardsService.getBoardById(id);
     this.actionEdit.next(id);
     this.editBoardForm.patchValue(this.board);
-
   }
 
   editBoard(form) {

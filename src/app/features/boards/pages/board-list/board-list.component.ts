@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {BoardsService} from "@core/services/boards.service";
-import {IBoard} from "@shared/interfaces/board.interface";
+import {IBoards} from "@shared/interfaces/boards.interface";
 import {BoardAddComponent} from "../board-add/board-add.component";
 import {MDBModalRef, MDBModalService} from "angular-bootstrap-md";
 import {take} from "rxjs";
@@ -14,7 +14,7 @@ import {BoardEditComponent} from "../board-edit/board-edit.component";
 
 export class BoardListComponent {
 
-  public boards: IBoard[] = [];
+  public boards: IBoards[] = [];
   public modalRef: MDBModalRef | null = null;
 
   constructor(private modalService: MDBModalService,
@@ -38,7 +38,7 @@ export class BoardListComponent {
       containerClass: 'right',
       animated: true,
     });
-    this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoard) => {
+    this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoards) => {
       this.boardsService.addBoard(board);
       this.getBoards();
     });
@@ -61,7 +61,6 @@ export class BoardListComponent {
     this.modalRef.content.actionEdit.pipe(take(1)).subscribe(() => {
       this.getBoards();
     });
-
   }
 
   toggleFavorite(board): void {

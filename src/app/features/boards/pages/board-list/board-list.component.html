@@ -13,8 +13,8 @@
           <h4 class="board__name">{{item.boardName}}</h4>
           <!-- Board favorite button -->
           <button type="button" class="board__btn" (click)="toggleFavorite(item)">
-            <icon class="fa-star" [class.far]="!item.isFavorite" [class.fas]="item.isFavorite"
-                  [class.favorite]="item.isFavorite"></icon>
+            <icon class="fa-star" [class.far]="!item.boardFavorite" [class.fas]="item.boardFavorite"
+                  [class.favorite]="item.boardFavorite"></icon>
           </button>
         </div>
         <!-- Board edit button -->
@@ -39,8 +39,8 @@
           <h4 class="board__name">{{item.boardName}}</h4>
           <!-- Board favorite button -->
           <button type="button" class="board__btn" (click)="toggleFavorite(item)">
-            <icon class="fa-star" [class.far]="!item.isFavorite" [class.fas]="item.isFavorite"
-                  [class.favorite]="item.isFavorite"></icon>
+            <icon class="fa-star" [class.far]="!item.boardFavorite" [class.fas]="item.boardFavorite"
+                  [class.favorite]="item.boardFavorite"></icon>
           </button>
         </div>
         <!-- Board edit button -->
@@ -48,7 +48,6 @@
           <mdb-icon fas icon="pencil-alt"></mdb-icon>
         </button>
       </div>
-
     </li>
     <!-- Add new board -->
     <div>
