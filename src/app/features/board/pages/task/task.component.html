@@ -1,1 +1,50 @@
-<p>task works!</p>
+<!-- Modal window -->
+<div class="modal-content rounded">
+  <!-- Modal body -->
+  <div class="modal-body d-flex flex-column justify-content-start">
+    <!-- Close button -->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeBoard()">
+      <span aria-hidden="true">×</span>
+    </button>
+    <!-- Name -->
+    <form class="pb-0 mb-0 px-2 mx-2" [formGroup]="editTaskForm">
+      <div class="md-form">
+        <input mdbInput mdbValidate formControlName="taskName" autocomplete="off"
+               type="text" class="form-control" id="nameTask">
+        <label for="nameTask">Enter a task name*</label>
+        <mdb-error *ngIf="taskNameForm.invalid && (taskNameForm.dirty || taskNameForm.touched)">
+          <span *ngIf="taskNameForm.errors.required">Board name is required</span>
+        </mdb-error>
+      </div>
+      <img class="align-self-center p-2 mb-2" src="./assets/images/add-board-preview-img.svg"
+           alt="board preview image" [style.background-color]=this.editTaskForm.value.taskBackground>
+      <!-- Add board form -->
+      <!-- Background color -->
+      <div class="text-left">
+        Select board background
+      </div>
+      <ul class="row no-gutters m-0 text-center">
+        <li class="radio-group col-3" *ngFor="let item of bgBoard; let i = index">
+          <input type="radio" formControlName="taskBackground" [value]="item.boardBackground" id="{{i}}"
+                 name="taskBackground" mdbInput>
+          <label for="{{i}}" [style.background-color]=item.boardBackground>
+            <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
+            <span class="radio-group--fade"></span>
+          </label>
+        </li>
+      </ul>
+
+    </form>
+  </div>
+  <!-- Cancel button -->
+  <div class="modal-footer justify-content-center">
+    <button type="button" mdbBtn color="secondary" class="waves-light relative rounded" aria-label="Close"
+            (click)="closeBoard()"
+            mdbWavesEffect>Cancel
+    </button>
+    <!-- Submit button -->
+    <button type="submit" mdbBtn color="primary" class="waves-light relative rounded"
+            (click)="editTask(this.taskNameForm.value)" mdbWavesEffect>Create
+    </button>
+  </div>
+</div>

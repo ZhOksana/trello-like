@@ -14,7 +14,7 @@ import {Subject} from "rxjs";
 
 export class BoardEditComponent implements OnInit {
 
-  public id: number;
+  public idBoard: number;
   public editBoardForm: FormGroup;
   public actionEdit = new Subject<any>();
   public bgBoard = this.boardsService.bgColorBoard;
@@ -33,7 +33,7 @@ export class BoardEditComponent implements OnInit {
       boardName: ['', [Validators.required, Validators.maxLength(15)]],
       boardFavorite: [],
     });
-    this.getBoardById(this.id);
+    this.getBoardById(this.idBoard);
   }
 
   get boardNameForm() {

@@ -42,15 +42,14 @@
               >
                 <mdb-icon class="fa" fas icon="edit"></mdb-icon>
               </a>
-              <a type="submit" mdbBtn
+              <button type="submit" mdbBtn
                  class="my-0 ml-1 mr-0 p-2 rounded column__header__btn--del"
-                 [class.column__header__btn--dis]="toggleDeleteColumn === itemColumn.columnId"
-                 (click)="deleteColumn(this.editColumnItem.value)"
-                 data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+                 [disabled]="itemColumn.columnTask.length"
+                 (click)="deleteColumn(itemColumn.columnId)"
               >
                 <mdb-icon class="fa" fas icon="trash"
                 ></mdb-icon>
-              </a>
+              </button>
               <a type="button" class="ml-2 close align-self-start"
                  (click)="toggleEditColumn = null; toggleDeleteColumn = null">
                 <mdb-icon class="column__header__btn--icon" fas icon="times"></mdb-icon>
@@ -67,11 +66,13 @@
         >
           <!-- Task list -->
           <li *ngFor="let taskColumn of itemColumn.columnTask"
+              [style.background-color]="taskColumn.taskBackground"
+
               class="m-2 p-2 task__item z-depth-1 task__content" cdkDrag
           >
             <!-- Task container -->
               <!-- Task link -->
-              <a [routerLink]="['board/', taskColumn.taskId]" class="task__link"> </a>
+              <a class="task__link" (click)="openTask(idBoard, itemColumn.columnId , taskColumn.taskId)"> </a>
 
                 <!-- Task name -->
                 <p class="task__name">{{taskColumn.taskName}}</p>

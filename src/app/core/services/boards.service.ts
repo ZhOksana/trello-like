@@ -113,7 +113,7 @@ export class BoardsService {
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
@@ -122,115 +122,115 @@ export class BoardsService {
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1004",
-              taskName: "Buy a new dress",
+              taskId: "1006",
+              taskName: "1006Buy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#519839",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1007",
+              taskName: "1007Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1004",
-              taskName: "Buy a new dress",
+              taskId: "1008",
+              taskName: "1008Buy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1009",
+              taskName: "1009Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1004",
-              taskName: "Buy a new dress",
+              taskId: "1010",
+              taskName: "B1010uy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#0067A3",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1011",
+              taskName: "1011Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#838C91",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1012",
+              taskName: "1012Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1004",
-              taskName: "Buy a new dress",
+              taskId: "1013",
+              taskName: "1013Buy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#B04632",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1014",
+              taskName: "1014Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1015",
+              taskName: "1015 to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#4BBF6B",
               taskUser: [],
             },
             {
-              taskId: "1004",
-              taskName: "Buy a new dress",
+              taskId: "1016",
+              taskName: "1016 a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#00AECC",
               taskUser: [],
             },
             {
-              taskId: "1005",
-              taskName: "Go to hospital",
+              taskId: "1017",
+              taskName: "1017 Go to hospital",
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#0067A3",
               taskUser: [],
             },
           ],
@@ -291,14 +291,14 @@ export class BoardsService {
     filterBoard[0].boardColumn.push({...board, columnId: randomId, columnTask: []})
   }
 
-  editColumn(form, id): void {
+  public editColumn(form, id): void {
     this.boards.filter(item => item.boardId === id)[0].boardColumn
       .find(item => item.columnId === form.columnId).columnName = form.columnName;
   }
 
-  deleteColumn(form, id) {
-    this.boards.filter(item => item.boardId === id)[0].boardColumn =
-      this.boards.filter(item => item.boardId === id)[0].boardColumn.filter(item => item.columnId !== form.columnId);
+  public deleteColumn(columnId, boardId) {
+    this.boards.filter(item => item.boardId === boardId)[0].boardColumn =
+      this.boards.filter(item => item.boardId === boardId)[0].boardColumn.filter(item => item.columnId !== columnId);
   }
 
   public addTask(task: ITask, idColumn: string, idBoard: string): void {
@@ -317,4 +317,8 @@ export class BoardsService {
     })
   }
 
+  public getTaskById(idBoard, idColumn, idTask): ITask {
+    return this.boards.filter(item => item.boardId === idBoard)[0].boardColumn
+      .filter(item => item.columnId === idColumn)[0].columnTask.find(item => item.taskId === idTask);
+  }
 }
