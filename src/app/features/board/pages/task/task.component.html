@@ -1,50 +1,103 @@
 <!-- Modal window -->
-<div class="modal-content rounded">
+<div class="modal-content rounded"
+     (click)="toggleFormView()">
   <!-- Modal body -->
-  <div class="modal-body d-flex flex-column justify-content-start">
+  <div class="modal-body p-0">
     <!-- Close button -->
-    <button type="button" class="close pull-right" aria-label="Close" (click)="closeBoard()">
+    <button type="button" class="close pull-right mt-2 mx-1 modal-body-btn" aria-label="Close" (click)="closeBoard()">
       <span aria-hidden="true">×</span>
     </button>
-    <!-- Name -->
-    <form class="pb-0 mb-0 px-2 mx-2" [formGroup]="editTaskForm">
-      <div class="md-form">
-        <input mdbInput mdbValidate formControlName="taskName" autocomplete="off"
-               type="text" class="form-control" id="nameTask">
-        <label for="nameTask">Enter a task name*</label>
-        <mdb-error *ngIf="taskNameForm.invalid && (taskNameForm.dirty || taskNameForm.touched)">
-          <span *ngIf="taskNameForm.errors.required">Board name is required</span>
-        </mdb-error>
+    <!-- Task form -->
+    <form class="p-0 m-0 form-row" [formGroup]="editTaskForm">
+      <div class="task__name p-0 m-0 col-12" (click)="$event.stopPropagation()">
+        <!-- Form view - task name -->
+        <a class="task__name__link" (click)="toggleBtnTaskName(task.taskId)">
+          <div *ngIf="toggleEditTaskName !== task.taskId"
+               class="px-3 d-flex m-3 align-items-baseline justify-content-center"
+          >
+            <!-- Task name -->
+            <i class="fa-lg fas fa-window-maximize m-2 task__name__icon"></i>
+            <p class="task__name__text">{{editTaskForm.value.taskName}}</p>
+          </div>
+        </a>
+        <!-- Form view - edit task name -->
+        <div *ngIf="toggleEditTaskName === task.taskId"
+             class="task__name__link">
+          <div class="d-flex px-3 m-2 align-items-baseline">
+            <i class="fa-lg fas fa-window-maximize m-2 task__name__icon"
+               style="color: #0079bf"></i>
+            <input mdbInput formControlName="taskName" autocomplete="off"
+                   type="text" class="form-control" appAutoFocus (keyup.enter)="toggleFormView()"
+            >
+          </div>
+        </div>
       </div>
-      <img class="align-self-center p-2 mb-2" src="./assets/images/add-board-preview-img.svg"
-           alt="board preview image" [style.background-color]=this.editTaskForm.value.taskBackground>
-      <!-- Add board form -->
-      <!-- Background color -->
-      <div class="text-left">
-        Select board background
+      <!-- Task description -->
+      <div class="col-8" (click)="$event.stopPropagation()"
+      >
+        <div class="d-flex px-2 mx-2 align-items-baseline">
+          <i class="fas fa-align-justify task__desc__icon"></i>
+          <p class="task__desc__text-header mb-2">Description</p>
+        </div>
+        <!-- Form view - description name -->
+        <div>
+          <a (click)="toggleBtnTaskDesc(task.taskId)">
+            <!-- Description -->
+            <div *ngIf="toggleEditTaskDesc !== task.taskId">
+            <pre *ngIf="editTaskForm.controls.taskDesc.value"
+                 class="ml-5 task__desc__text"
+            >{{editTaskForm.value.taskDesc}}
+              </pre>
+              <pre *ngIf="!editTaskForm.controls.taskDesc.value"
+                   class="ml-5 task__desc__text task__desc__text--empty"
+              >Add a more detailed description...
+              </pre>
+            </div>
+          </a>
+          <!-- Form view - edit description -->
+          <div *ngIf="toggleEditTaskDesc === task.taskId"
+               class="d-flex flex-column ml-5"
+          >
+              <textarea mdbInput formControlName="taskDesc" autocomplete="off"
+                        type="text" class="form-control task__desc__text--input"
+                        appAutoFocus #textAreaDesc
+                        [value]="editTaskForm.value.taskDesc"
+                        [style.height]="heightTextAreaDescription(textAreaDesc)"
+                        [style.overflow]="textAreaDesc.scrollHeight<250 ? 'hidden' : 'auto'"
+              >
+              </textarea>
+            <div>
+              <!-- Submit button -->
+              <button type="submit" mdbBtn color="primary"
+                      class="rounded task__desc__btn p-2"
+                      (click)="toggleFormView()"
+              >Safe
+              </button>
+              <!-- Cancel button -->
+              <button type="button" mdbBtn
+                      class="rounded task__desc__btn task__desc__btn--close p-2"
+                      (click)="cancelChangeTextArea()"
+              >Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <ul class="row no-gutters m-0 text-center">
-        <li class="radio-group col-3" *ngFor="let item of bgBoard; let i = index">
-          <input type="radio" formControlName="taskBackground" [value]="item.boardBackground" id="{{i}}"
-                 name="taskBackground" mdbInput>
-          <label for="{{i}}" [style.background-color]=item.boardBackground>
-            <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
-            <span class="radio-group--fade"></span>
-          </label>
-        </li>
-      </ul>
-
+      <!-- Task manager -->
+      <div class="col-4" style="background-color: #0079bf; width:auto; height: auto; display: block">
+        <p>asdasddasdasdad</p>
+      </div>
     </form>
   </div>
-  <!-- Cancel button -->
   <div class="modal-footer justify-content-center">
-    <button type="button" mdbBtn color="secondary" class="waves-light relative rounded" aria-label="Close"
+    <!-- Submit button -->
+    <button type="submit" mdbBtn color="success" class="waves-light relative rounded"
+            (click)="editTask(this.taskNameForm.value)" mdbWavesEffect>Create
+    </button>
+    <!-- Cancel button -->
+    <button type="button" mdbBtn color="outline-danger" class="waves-light relative rounded" aria-label="Close"
             (click)="closeBoard()"
             mdbWavesEffect>Cancel
-    </button>
-    <!-- Submit button -->
-    <button type="submit" mdbBtn color="primary" class="waves-light relative rounded"
-            (click)="editTask(this.taskNameForm.value)" mdbWavesEffect>Create
     </button>
   </div>
 </div>

@@ -42,15 +42,15 @@
           </div>
         </form>
       </div>
-      <!-- Cancel button -->
       <div class="modal-footer justify-content-center">
-        <button type="button" mdbBtn color="secondary" class="waves-light relative rounded" aria-label="Close"
+        <!-- Submit button -->
+        <button type="submit" mdbBtn color="success" class="waves-light relative rounded"
+                (click)="addBoard(this.addBoardForm.value)" mdbWavesEffect>Create
+        </button>
+        <!-- Cancel button -->
+        <button type="button" mdbBtn color="outline-danger" class="waves-light relative rounded" aria-label="Close"
                 (click)="closeBoard()"
                 mdbWavesEffect>Cancel
-        </button>
-      <!-- Submit button -->
-        <button type="submit" mdbBtn color="primary" class="waves-light relative rounded"
-                (click)="addBoard(this.addBoardForm.value)" mdbWavesEffect>Create
         </button>
       </div>
     </div>

@@ -23,7 +23,6 @@ export class BoardComponent implements OnInit {
   public toggleAddTask: string = null;
   public toggleEditColumn: string = null;
   public toggleDeleteColumn: string = null;
-  public taskLength: number = null;
   public modalRef: MDBModalRef | null = null;
 
   constructor(private modalService: MDBModalService,
@@ -97,10 +96,9 @@ export class BoardComponent implements OnInit {
     }, 0)
   }
 
-  editColumnButton(form, id: string) {
+  editColumnButton(id: string) {
     this.toggleEditColumn = id;
-      this.toggleDeleteColumn = id;
-
+    this.toggleDeleteColumn = id;
   }
 
   toggleFormView() {
@@ -115,22 +113,24 @@ export class BoardComponent implements OnInit {
   }
 
   editColumn(form) {
-    this.boardsService.editColumn(form, this.idBoard)
-    this.toggleEditColumn = null;
+    if (this.editColumnItem.valid) {
+      this.boardsService.editColumn(form, this.idBoard)
+      this.toggleEditColumn = null;
+    }
   }
 
   deleteColumn(id) {
-         this.boardsService.deleteColumn(id, this.idBoard)
+    this.boardsService.deleteColumn(id, this.idBoard)
   }
 
-  openTask(idBoard, idColumn, idTask ) {
+  openTask(idBoard, idColumn, idTask) {
     this.modalRef = this.modalService.show(TaskComponent, {
       backdrop: true,
       keyboard: true,
       focus: true,
       show: false,
       ignoreBackdropClick: false,
-      class: 'modal-dialog-centered',
+      class: 'modal-dialog-centered modal-lg',
       animated: true,
       data: {
         idTask,
@@ -138,8 +138,8 @@ export class BoardComponent implements OnInit {
         idBoard
       }
     });
-/*    this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoards) => {
-      this.boardsService.addBoard(board);
-    });*/
+    /*    this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoards) => {
+          this.boardsService.addBoard(board);
+        });*/
   }
 }

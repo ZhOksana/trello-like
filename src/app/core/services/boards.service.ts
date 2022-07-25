@@ -27,7 +27,7 @@ export class BoardsService {
               taskDesc: "Tell him about my new project",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "blue",
+              taskBackground: "#172B4D",
               taskUser: [],
             },
           ],
@@ -65,7 +65,7 @@ export class BoardsService {
               taskDesc: "Planned travel for me and my wife when I can take a vacation",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "red",
+              taskBackground: "#FF8ED4",
               taskUser: [],
             },
           ],
@@ -98,7 +98,7 @@ export class BoardsService {
               taskDesc: "I want to clean my car inside",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "purple",
+              taskBackground: "#29CCE5",
               taskUser: [],
             },
           ],
@@ -131,7 +131,7 @@ export class BoardsService {
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#519839",
+              taskBackground: "#5BA4CF",
               taskUser: [],
             },
             {
@@ -167,7 +167,7 @@ export class BoardsService {
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#0067A3",
+              taskBackground: "#CD8DE5",
               taskUser: [],
             },
             {
@@ -176,7 +176,7 @@ export class BoardsService {
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#838C91",
+              taskBackground: "#EF7564",
               taskUser: [],
             },
             {
@@ -194,7 +194,7 @@ export class BoardsService {
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#B04632",
+              taskBackground: "#EF7564",
               taskUser: [],
             },
             {
@@ -203,7 +203,7 @@ export class BoardsService {
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "",
+              taskBackground: "#172B4D",
               taskUser: [],
             },
             {
@@ -212,7 +212,7 @@ export class BoardsService {
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#4BBF6B",
+              taskBackground: "#FFAF3F",
               taskUser: [],
             },
             {
@@ -221,7 +221,7 @@ export class BoardsService {
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#00AECC",
+              taskBackground: "#F5DD29",
               taskUser: [],
             },
             {
@@ -230,7 +230,7 @@ export class BoardsService {
               taskDesc: "My headache is growing, need to go to hospital",
               taskTag: [],
               taskDate: "unknown",
-              taskBackground: "#0067A3",
+              taskBackground: "#7BC86C",
               taskUser: [],
             },
           ],
@@ -250,6 +250,18 @@ export class BoardsService {
     {boardBackground: "#0067A3"},
   ];
 
+  public bgColorTask = [
+    {boardBackground: "#7BC86C"},
+    {boardBackground: "#F5DD29"},
+    {boardBackground: "#FFAF3F"},
+    {boardBackground: "#EF7564"},
+    {boardBackground: "#CD8DE5"},
+    {boardBackground: "#5BA4CF"},
+    {boardBackground: "#29CCE5"},
+    {boardBackground: "#6DECA9"},
+    {boardBackground: "#FF8ED4"},
+    {boardBackground: "#172B4D"},
+  ];
   public getBoards(): IBoards[] {
     return this.boards;
   }
