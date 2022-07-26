@@ -12,7 +12,7 @@
       <div class="task__name p-0 m-0 col-12" (click)="$event.stopPropagation()">
         <!-- Form view - task name -->
         <a class="task__name__link" (click)="toggleBtnTaskName(task.taskId)">
-          <div *ngIf="toggleEditTaskName !== task.taskId"
+          <div *ngIf="toggleEditTaskName === null"
                class="px-3 d-flex m-3 align-items-baseline justify-content-center"
           >
             <!-- Task name -->
@@ -21,7 +21,7 @@
           </div>
         </a>
         <!-- Form view - edit task name -->
-        <div *ngIf="toggleEditTaskName === task.taskId"
+        <div *ngIf="toggleEditTaskName"
              class="task__name__link">
           <div class="d-flex px-3 m-2 align-items-baseline">
             <i class="fa-lg fas fa-window-maximize m-2 task__name__icon"
@@ -33,11 +33,18 @@
         </div>
       </div>
       <!-- Task description -->
-      <div class="col-8" (click)="$event.stopPropagation()"
-      >
-        <div class="d-flex px-2 mx-2 align-items-baseline">
+      <div class="col-8" (click)="$event.stopPropagation()">
+        <div class="d-flex px-2 mx-2 mb-1 align-items-baseline">
           <i class="fas fa-align-justify task__desc__icon"></i>
           <p class="task__desc__text-header mb-2">Description</p>
+          <span *ngIf="!toggleEditTaskDesc && editTaskForm.value.taskDesc">
+          <button
+            type="button"
+            class="rounded task__desc__btn task__desc__btn--edit p-2"
+            (click)="toggleBtnTaskDesc(task.taskId)"
+          >Edit
+          </button>
+          </span>
         </div>
         <!-- Form view - description name -->
         <div>
@@ -63,7 +70,7 @@
                         appAutoFocus #textAreaDesc
                         [value]="editTaskForm.value.taskDesc"
                         [style.height]="heightTextAreaDescription(textAreaDesc)"
-                        [style.overflow]="textAreaDesc.scrollHeight<250 ? 'hidden' : 'auto'"
+                        [style.overflow]="textAreaDesc.scrollHeight < 250 ? 'hidden' : 'auto'"
               >
               </textarea>
             <div>

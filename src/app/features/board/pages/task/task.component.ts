@@ -1,4 +1,10 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MDBModalService} from "angular-bootstrap-md";
 import {BoardsService} from "@core/services/boards.service";
@@ -9,9 +15,10 @@ import {ITask} from "@shared/interfaces/task.interface";
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class TaskComponent implements OnInit, AfterViewChecked {
+export class TaskComponent implements OnInit {
 
   public idTask: string;
   public idBoard: string;
@@ -23,11 +30,12 @@ export class TaskComponent implements OnInit, AfterViewChecked {
   public toggleEditTaskName: string = null;
   public toggleEditTaskDesc: string = null;
   public tempTaskDesc: string = null;
+  @ViewChild('textAreaDesc') textAreaDesc: ElementRef;
 
   constructor(public fb: FormBuilder,
               private modalService: MDBModalService,
               private boardsService: BoardsService,
-              private changeDetector: ChangeDetectorRef) {
+              ) {
   }
 
   ngOnInit() {
@@ -41,10 +49,6 @@ export class TaskComponent implements OnInit, AfterViewChecked {
       taskUser: [],
     });
     this.getBoardById();
-  }
-
-  ngAfterViewChecked() {
-    this.changeDetector.detectChanges();
   }
 
   get taskNameForm() {
@@ -67,8 +71,7 @@ export class TaskComponent implements OnInit, AfterViewChecked {
     if (this.editTaskForm.invalid) {
 
     } else if (this.editTaskForm.valid) {
-
-      /*     this.boards = this.boardsService.getBoards();*/
+      /* this.boards = this.boardsService.getBoards();*/
       this.actionEdit.next(form);
       this.modalService.hide(1);
     }
@@ -92,11 +95,10 @@ export class TaskComponent implements OnInit, AfterViewChecked {
 
   heightTextAreaDescription(textArea) {
     if (textArea.scrollHeight < 250) {
-      if (textArea.scrollTop > 0) {
-        return textArea.scrollHeight + 'px';
-      }
+      return textArea.scrollHeight - 14 + 'px';
+    } else if (textArea.scrollHeight > 250) {
+      return this.textAreaDesc.nativeElement.style.height = 250 + 'px';
     }
-    return textArea.scrollTop;
   }
 
   cancelChangeTextArea() {
