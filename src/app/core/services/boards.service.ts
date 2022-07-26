@@ -251,16 +251,16 @@ export class BoardsService {
   ];
 
   public bgColorTask = [
-    {boardBackground: "#7BC86C"},
-    {boardBackground: "#F5DD29"},
-    {boardBackground: "#FFAF3F"},
-    {boardBackground: "#EF7564"},
-    {boardBackground: "#CD8DE5"},
-    {boardBackground: "#5BA4CF"},
-    {boardBackground: "#29CCE5"},
-    {boardBackground: "#6DECA9"},
-    {boardBackground: "#FF8ED4"},
-    {boardBackground: "#172B4D"},
+    {taskBackground: "#7BC86C"},
+    {taskBackground: "#F5DD29"},
+    {taskBackground: "#FFAF3F"},
+    {taskBackground: "#EF7564"},
+    {taskBackground: "#CD8DE5"},
+    {taskBackground: "#5BA4CF"},
+    {taskBackground: "#29CCE5"},
+    {taskBackground: "#6DECA9"},
+    {taskBackground: "#FF8ED4"},
+    {taskBackground: "#172B4D"},
   ];
   public getBoards(): IBoards[] {
     return this.boards;

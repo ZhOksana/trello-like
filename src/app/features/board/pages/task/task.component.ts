@@ -108,4 +108,7 @@ export class TaskComponent implements OnInit {
     console.log(this.editTaskForm)
   }
 
+  fff(){
+    console.log(this.editTaskForm.value)
+  }
 }

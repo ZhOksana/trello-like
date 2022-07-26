@@ -1,14 +1,20 @@
 <!-- Modal window -->
-<div class="modal-content rounded"
+<div class="modal-content"
      (click)="toggleFormView()">
   <!-- Modal body -->
   <div class="modal-body p-0">
     <!-- Close button -->
     <button type="button" class="close pull-right mt-2 mx-1 modal-body-btn" aria-label="Close" (click)="closeBoard()">
-      <span aria-hidden="true">×</span>
+      <span aria-hidden="true"
+            [style.color]="editTaskForm.value.taskBackground === '#172B4D'? 'white' : ''"
+      >×</span>
     </button>
+    <div class="task__header-color"
+         *ngIf="editTaskForm.value.taskBackground"
+         [style.background-color]="editTaskForm.value.taskBackground"
+    ></div>
     <!-- Task form -->
-    <form class="p-0 m-0 form-row" [formGroup]="editTaskForm">
+    <form class="p-0 m-0 form-row justify-content-end form" [formGroup]="editTaskForm">
       <div class="task__name p-0 m-0 col-12" (click)="$event.stopPropagation()">
         <!-- Form view - task name -->
         <a class="task__name__link" (click)="toggleBtnTaskName(task.taskId)">
@@ -22,7 +28,9 @@
         </a>
         <!-- Form view - edit task name -->
         <div *ngIf="toggleEditTaskName"
-             class="task__name__link">
+             class="task__name__link"
+             [style.right]="task.taskBackground ? '0px' : '20px'"
+        >
           <div class="d-flex px-3 m-2 align-items-baseline">
             <i class="fa-lg fas fa-window-maximize m-2 task__name__icon"
                style="color: #0079bf"></i>
@@ -33,7 +41,7 @@
         </div>
       </div>
       <!-- Task description -->
-      <div class="col-8" (click)="$event.stopPropagation()">
+      <div class="col-9" (click)="$event.stopPropagation()">
         <div class="d-flex px-2 mx-2 mb-1 align-items-baseline">
           <i class="fas fa-align-justify task__desc__icon"></i>
           <p class="task__desc__text-header mb-2">Description</p>
@@ -78,7 +86,7 @@
               <button type="submit" mdbBtn color="primary"
                       class="rounded task__desc__btn p-2"
                       (click)="toggleFormView()"
-              >Safe
+              >Save
               </button>
               <!-- Cancel button -->
               <button type="button" mdbBtn
@@ -90,21 +98,64 @@
           </div>
         </div>
       </div>
-      <!-- Task manager -->
-      <div class="col-4" style="background-color: #0079bf; width:auto; height: auto; display: block">
-        <p>asdasddasdasdad</p>
+      <!-- Modal window for confirm delete -->
+      <div mdbModal #coverModal="mdbModal" class="modal modal-sm modal-frame modal-bottom" tabindex="-1" role="dialog"
+           aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: false}">
+        <div class="modal-side modal-sm" role="document">
+          <div class="modal-content">
+            <!-- Modal body -->
+            <p class="task__m-cover__header my-1">Cover</p>
+            <button type="button" class="close pull-right mt-1" aria-label="Close"
+                    (click)="coverModal.hide()"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <!-- Modal list of cover -->
+            <div class="modal-body d-flex flex-column align-items-start pt-1 pb-0">
+              <p class="task__m-cover__text mt-0">Colors</p>
+              <div class="d-flex flex-wrap task__m-cover__card mt-0">
+                <li class="radio-group" *ngFor="let item of bgBoard; let i = index">
+                  <input type="radio" formControlName="taskBackground" [value]="item.taskBackground" id="taskBackground+{{i}}"
+                         name="taskBackground" mdbInput>
+                  <label for="taskBackground+{{i}}" [style.background-color]=item.taskBackground>
+                    <mdb-icon fas icon="check" class="radio-group--icon"></mdb-icon>
+                    <span class="radio-group--fade"></span>
+                  </label>
+                </li>
+              </div>
+            </div>
+            <button type="button" mdbBtn
+                    class="rounded task__m-cover__btn task__m-cover--close px-3 py-2 align-self-end mb-4 mr-4"
+                    (click)="editTaskForm.value.taskBackground = ''"
+                    [disabled]="editTaskForm.value.taskBackground === ''; editTaskForm.reset('taskBackground')"
+            >Remove cover
+            </button>
+          </div>
+        </div>
       </div>
-    </form>
-  </div>
-  <div class="modal-footer justify-content-center">
+      <!-- Task manager -->
+      <div class="col-3 d-flex flex-column">
+        <p class="task__sidebar__header m-0 pb-2">Add to card</p>
+        <!-- Cover button -->
+        <button type="button"  class="task__sidebar__btn justify-content-center"
+                (click)="coverModal.show()"
+                mdbWavesEffect
+        ><i class="fas fa-sm fa-book-open p-2"></i>
+          Cover
+        </button>
+        </div>
+
+  <div class="m-2 p-2 d-flex align-items-end">
     <!-- Submit button -->
     <button type="submit" mdbBtn color="success" class="waves-light relative rounded"
-            (click)="editTask(this.taskNameForm.value)" mdbWavesEffect>Create
+            (click)="fff()" mdbWavesEffect>Edit
     </button>
     <!-- Cancel button -->
     <button type="button" mdbBtn color="outline-danger" class="waves-light relative rounded" aria-label="Close"
             (click)="closeBoard()"
             mdbWavesEffect>Cancel
     </button>
+  </div>
+    </form>
   </div>
 </div>

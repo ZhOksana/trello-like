@@ -21,7 +21,7 @@
             Select board background
           </div>
           <ul class="row no-gutters m-0 text-center">
-            <li class="radio-group col-3" *ngFor="let item of bgBoard; let i = index">
+            <li class="radio-group col-1" *ngFor="let item of bgBoard; let i = index">
               <input type="radio" formControlName="boardBackground" [value]="item.boardBackground" id="{{i}}"
                      name="boardBackground" mdbInput>
               <label for="{{i}}" [style.background-color]=item.boardBackground>
