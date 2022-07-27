@@ -25,7 +25,8 @@ export class TaskComponent implements OnInit {
   public idColumn: string;
   public editTaskForm: FormGroup;
   public actionEdit = new Subject<any>();
-  public bgBoard = this.boardsService.bgColorTask;
+  public bgTask = this.boardsService.bgColorTask;
+  public tags = this.boardsService.Tags;
   public task: ITask;
   public toggleEditTaskName: string = null;
   public toggleEditTaskDesc: string = null;
@@ -35,7 +36,7 @@ export class TaskComponent implements OnInit {
   constructor(public fb: FormBuilder,
               private modalService: MDBModalService,
               private boardsService: BoardsService,
-              ) {
+  ) {
   }
 
   ngOnInit() {
@@ -108,7 +109,14 @@ export class TaskComponent implements OnInit {
     console.log(this.editTaskForm)
   }
 
-  fff(){
+  fff() {
     console.log(this.editTaskForm.value)
+  }
+  toggleTags(event,index){
+    if(event.target.checked) {
+      this.editTaskForm.value.taskTag.push(this.tags[index]);
+    } else {
+      this.editTaskForm.value.taskTag = this.editTaskForm.value.taskTag.filter(item => item.tagId != index)
+    }
   }
 }

@@ -3,6 +3,7 @@ import {IBoards} from "@shared/interfaces/boards.interface";
 import {v4 as getUniqueID} from 'uuid';
 import {IBoard} from "@shared/interfaces/board.interface";
 import {ITask} from "@shared/interfaces/task.interface";
+import {ITag} from "@shared/interfaces/tag.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -261,7 +262,62 @@ export class BoardsService {
     {taskBackground: "#6DECA9"},
     {taskBackground: "#FF8ED4"},
     {taskBackground: "#172B4D"},
+    {taskBackground: ""}
   ];
+
+  public Tags: ITag[] = [
+    {
+      tagId: "0",
+      tagName: "",
+      tagBackground: "#61BD4F",
+    },
+    {
+      tagId: "1",
+      tagName: "",
+      tagBackground: "#F2D600",
+    },
+    {
+      tagId: "2",
+      tagName: "",
+      tagBackground: "#FF9F1A",
+    },
+    {
+      tagId: "3",
+      tagName: "",
+      tagBackground: "#EB5A46",
+    },
+    {
+      tagId: "4",
+      tagName: "",
+      tagBackground: "#C377E0",
+    },
+    {
+      tagId: "5",
+      tagName: "",
+      tagBackground: "#0079BF",
+    },
+    {
+      tagId: "6",
+      tagName: "",
+      tagBackground: "#00C2E0",
+    },
+    {
+      tagId: "7",
+      tagName: "",
+      tagBackground: "#51E898",
+    },
+    {
+      tagId: "8",
+      tagName: "",
+      tagBackground: "#FF78CB",
+    },
+    {
+      tagId: "9",
+      tagName: "",
+      tagBackground: "#344563",
+    },
+  ];
+
   public getBoards(): IBoards[] {
     return this.boards;
   }
