@@ -22,6 +22,24 @@ pre {
 
   &--height {
     overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(185, 189, 197, 0.4);
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background: rgba(185, 189, 197, 0.8);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgba(185, 189, 197, 1);
+    }
   }
 
 }
@@ -280,6 +298,21 @@ pre {
         background-color: #091e4214;
       }
     }
+
+    &__change__btn {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      border: none;
+      background: none;
+      transform: scale(0.8);
+      font-weight: 400;
+      opacity: 0.5;
+
+      &:hover {
+        opacity: 0.75;
+      }
+    }
   }
 
   &__bottom-btn {
@@ -293,9 +326,12 @@ pre {
     font-weight: 400;
     transform: scale(0.9);
   }
+
 }
 
 .radio-group {
+  position: relative;
+
   input[type="radio"] {
     opacity: 0;
     width: 0;
@@ -350,25 +386,39 @@ pre {
 
     &:checked ~ label {
       display: inline-block;
-      color: white;
+
+      p {
+        color: #172B4D;
+      }
 
       .checkbox-group--icon {
         display: inline-block;
         position: absolute;
-        top: 30%;
-        right: 35%;
+        top: 14%;
+        right: 3%;
+        transform: scale(0.7);
+        padding: 4px;
+        background-color: white;
+        border-radius: 50%;
+        font-weight: 600;
       }
     }
   }
 
   label {
     position: relative;
-    width: 210px;
+    width: 230px;
     height: 32px;
-    background-color: #ddd;
+    font-size: 14px;
+    font-weight: 500;
     padding: 5px 10px;
     margin: 1px 2px;
     border-radius: 3px;
+    font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
+
+    &:hover {
+      padding-left: 14px;
+    }
   }
 
   &--fade {
@@ -379,13 +429,36 @@ pre {
     left: 0;
     border-radius: 3px;
 
+    &:hover:before {
+      position: absolute;
+      content: "";
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 222px;
+      background-color: rgba(0, 0, 0, 0.20);
+      border-radius: 3px 0 0 3px;
+    }
+  }
+
+
+  &--icon {
+    display: none;
+  }
+
+  &__btn-edit {
+    border: none;
+    color: #42526e;
+    transform: scale(0.85);
+    background-color: #F4F5F7;
+    padding: 7px 10px;
+    margin: 0;
+    border-radius: 5px;
+
     &:hover {
       background-color: rgba(0, 0, 0, 0.09);
     }
   }
 
-  &--icon {
-    display: none;
-  }
 }
 

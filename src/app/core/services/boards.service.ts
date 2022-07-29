@@ -5,6 +5,7 @@ import {IBoard} from "@shared/interfaces/board.interface";
 import {ITask} from "@shared/interfaces/task.interface";
 import {ITag} from "@shared/interfaces/tag.interface";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -268,22 +269,22 @@ export class BoardsService {
   public Tags: ITag[] = [
     {
       tagId: "0",
-      tagName: "",
+      tagName: "Cool",
       tagBackground: "#61BD4F",
     },
     {
       tagId: "1",
-      tagName: "",
+      tagName: "Warning",
       tagBackground: "#F2D600",
     },
     {
       tagId: "2",
-      tagName: "",
+      tagName: "Need to do",
       tagBackground: "#FF9F1A",
     },
     {
       tagId: "3",
-      tagName: "",
+      tagName: "Important",
       tagBackground: "#EB5A46",
     },
     {
@@ -308,12 +309,12 @@ export class BoardsService {
     },
     {
       tagId: "8",
-      tagName: "",
+      tagName: "Pink",
       tagBackground: "#FF78CB",
     },
     {
       tagId: "9",
-      tagName: "",
+      tagName: "Black List",
       tagBackground: "#344563",
     },
   ];
@@ -331,7 +332,7 @@ export class BoardsService {
     this.boards.push({...board, boardId: randomId, boardBackground: board.boardBackground})
   }
 
-  editBoard(form): void {
+  public editBoard(form): void {
     this.boards = this.boards.map(item => {
       if (item.boardId === form.boardId) {
         return {...item, ...form};
@@ -388,5 +389,22 @@ export class BoardsService {
   public getTaskById(idBoard, idColumn, idTask): ITask {
     return this.boards.filter(item => item.boardId === idBoard)[0].boardColumn
       .filter(item => item.columnId === idColumn)[0].columnTask.find(item => item.taskId === idTask);
+  }
+
+  public getTag(tagId){
+    return this.Tags.find(tag => tag.tagId === tagId)
+  }
+
+  public addTag(form){
+    this.Tags.push({...form, tagId: this.Tags.length});
+  }
+
+  public editTag(form){
+    let filterBoard = this.Tags;
+    console.log(this.Tags)
+  }
+
+  public deleteTag(id){
+    this.Tags = this.Tags.filter(item => item.tagId !== id)
   }
 }

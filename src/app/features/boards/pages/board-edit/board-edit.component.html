@@ -21,7 +21,7 @@
             Select board background
           </div>
           <ul class="row no-gutters m-0 text-center">
-            <li class="radio-group col-1" *ngFor="let item of bgBoard; let i = index">
+            <li class="radio-group col-3" *ngFor="let item of bgBoard; let i = index">
               <input type="radio" formControlName="boardBackground" [value]="item.boardBackground" id="{{i}}"
                      name="boardBackground" mdbInput>
               <label for="{{i}}" [style.background-color]=item.boardBackground>
@@ -51,7 +51,7 @@
         <div mdbModal #basicModal="mdbModal" class="modal modal-frame modal-bottom" tabindex="-1" role="dialog"
              aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: false}">
           <div class="modal-dialog modal-frame modal-bottom" role="document">
-            <div class="modal-content  modal-delete">
+            <div class="modal-content modal-delete">
               <!-- Modal body -->
               <div class="modal-body d-flex flex-column align-items-center">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
