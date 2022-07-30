@@ -5,7 +5,7 @@
   <ul class="mt-4 d-flex flex-wrap align-items-center">
     <li *ngFor="let item of boards | favoriteBoards" class="board__list m-2 z-depth-1"
         [style.background]=item.boardBackground>
-      <div class="d-flex flex-column justify-content-between board__content">
+      <div class="d-flex flex-column justify-content-between board__content board--fade">
         <!-- Board link -->
         <a [routerLink]="['board', item.boardId]" class="board__link"> </a>
         <div class="d-flex justify-content-between">
@@ -31,9 +31,11 @@
   <ul class="mt-4 d-flex flex-wrap align-items-center">
     <li *ngFor="let item of boards" class="board__list m-2 z-depth-1" [style.background]=item.boardBackground>
       <!-- Board content -->
-      <div class="d-flex flex-column justify-content-between board__content">
+      <div class="d-flex flex-column justify-content-between board__content board--fade">
+
         <!-- Board link -->
-        <a [routerLink]="['board', item.boardId]" class="board__link"> </a>
+        <a [routerLink]="['board', item.boardId]" class="board__link"></a>
+
         <div class="d-flex justify-content-between">
           <!-- Board name -->
           <h4 class="board__name">{{item.boardName}}</h4>
@@ -48,6 +50,7 @@
           <mdb-icon fas icon="pencil-alt"></mdb-icon>
         </button>
       </div>
+
     </li>
     <!-- Add new board -->
     <div>
