@@ -45,7 +45,7 @@ pre {
 }
 
 .form {
-  min-height: 300px;
+  min-height: 370px;
 }
 
 .task {
@@ -262,7 +262,7 @@ pre {
     }
   }
 
-  &__m-cover {
+  &__modal {
     &__header {
       height: 32px;
       border-bottom: 1px solid #091e4221;
@@ -282,10 +282,18 @@ pre {
       margin-top: 16px;
       margin-bottom: 4px;
       font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
+
+    }
+    &__input{
+      box-shadow: inset 0 0 0 2px #0079bf;
+      font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
     }
 
     &__card {
       width: 270px;
+      &--edit {
+        height: 270px;
+      }
     }
 
     &__btn {
@@ -297,9 +305,10 @@ pre {
       &:hover {
         background-color: #091e4214;
       }
+
     }
 
-    &__change__btn {
+    &__change-btn {
       position: absolute;
       top: 0;
       left: 5px;
@@ -312,6 +321,10 @@ pre {
       &:hover {
         opacity: 0.75;
       }
+    }
+    &__add-btn{
+      width: 265px;
+      margin-left: 2px;
     }
   }
 
@@ -401,6 +414,10 @@ pre {
         background-color: white;
         border-radius: 50%;
         font-weight: 600;
+        &--reverse{
+          color: white;
+          background-color: black;
+        }
       }
     }
   }

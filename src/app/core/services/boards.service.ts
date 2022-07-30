@@ -131,7 +131,13 @@ export class BoardsService {
               taskId: "1006",
               taskName: "1006Buy a new dress",
               taskDesc: "I want to buy a new dress in a new shop what opened nearby our home",
-              taskTag: [],
+              taskTag: [
+                {
+                  tagBackground: "#EB5A46",
+                  tagId: "3",
+                  tagName: "Important",
+                },
+              ],
               taskDate: "unknown",
               taskBackground: "#5BA4CF",
               taskUser: [],
@@ -266,6 +272,20 @@ export class BoardsService {
     {taskBackground: ""}
   ];
 
+  public bgColorTag = [
+    {tagBackground: "#61BD4F"},
+    {tagBackground: "#F2D600"},
+    {tagBackground: "#FF9F1A"},
+    {tagBackground: "#EB5A46"},
+    {tagBackground: "#C377E0"},
+    {tagBackground: "#0079BF"},
+    {tagBackground: "#00C2E0"},
+    {tagBackground: "#51E898"},
+    {tagBackground: "#FF78CB"},
+    {tagBackground: "#344563"},
+    {tagBackground: ""}
+  ];
+
   public Tags: ITag[] = [
     {
       tagId: "0",
@@ -391,20 +411,29 @@ export class BoardsService {
       .filter(item => item.columnId === idColumn)[0].columnTask.find(item => item.taskId === idTask);
   }
 
-  public getTag(tagId){
+  public getTag(tagId) {
     return this.Tags.find(tag => tag.tagId === tagId)
   }
 
-  public addTag(form){
-    this.Tags.push({...form, tagId: this.Tags.length});
-  }
-
-  public editTag(form){
-    let filterBoard = this.Tags;
+  public addTag(form, tagLength) {
+    this.Tags.push({...form, tagId: tagLength});
     console.log(this.Tags)
   }
 
-  public deleteTag(id){
+  public editTag(form) {
+    this.Tags.find(item => item.tagId === form.tagId).tagBackground = form.tagBackground;
+    this.Tags.find(item => item.tagId === form.tagId).tagName = form.tagName;
+  }
+
+  public deleteTag(id) {
     this.Tags = this.Tags.filter(item => item.tagId !== id)
+  }
+
+  public checkTagActive(itemId, idTask, idBoard, idColumn) {
+    return this.boards.filter(item => item.boardId === idBoard)[0].boardColumn
+      .filter(item => item.columnId === idColumn)[0].columnTask
+      .filter(item => item.taskId === idTask)[0].taskTag
+      .filter(item => item.tagId === itemId)[0];
+
   }
 }

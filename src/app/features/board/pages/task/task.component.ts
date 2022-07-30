@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MDBModalService} from "angular-bootstrap-md";
 import {BoardsService} from "@core/services/boards.service";
 import {Subject} from "rxjs";
@@ -27,6 +27,7 @@ export class TaskComponent implements OnInit {
   public editTagForm: FormGroup;
   public actionEdit = new Subject<any>();
   public bgTask = this.boardsService.bgColorTask;
+  public bgTag = this.boardsService.bgColorTag;
   public tags = this.boardsService.Tags;
   public task: ITask;
   public toggleEditTaskName: string = null;
@@ -129,23 +130,30 @@ export class TaskComponent implements OnInit {
     }
   }
 
-  toggleBtnEditTag(tagId?) {
+  toggleBtnEditTag(tagId?, tagLength?) {
+
     if (this.toggleEditTag) {
       this.toggleEditTag = null;
     } else {
       this.toggleEditTag = tagId;
       this.editTagForm.patchValue(this.boardsService.getTag(tagId))
     }
+    if (tagLength) {
+      this.toggleEditTag = tagLength.toString();
+      this.editTagForm.reset();
+    }
+    console.log("tagId",tagId, "newTag", tagLength, "this.toggleEditTag", this.toggleEditTag)
   }
 
-  addTag(form) {
-    console.log("add",form)
-    this.boardsService.addTag(form);
+
+  addTag(form, tagLength) {
+    this.boardsService.addTag(form, tagLength.toString());
     this.getTag();
   }
 
   editTag(form) {
     this.boardsService.editTag(form);
+    this.getTag();
   }
 
   deleteTag(id) {
@@ -153,5 +161,8 @@ export class TaskComponent implements OnInit {
     this.getTag();
   }
 
+  checkTagActive(itemId, idTask){
+    return this.boardsService.checkTagActive(itemId, idTask, this.idBoard, this.idColumn);
+  }
 
 }

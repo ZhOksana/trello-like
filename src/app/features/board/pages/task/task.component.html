@@ -104,7 +104,7 @@
         <div class="modal-side modal-sm" role="document">
           <div class="modal-content">
             <!-- Modal body -->
-            <p class="task__m-cover__header my-1">Cover</p>
+            <p class="task__modal__header my-1">Cover</p>
             <button type="button" class="close pull-right mt-1 task__m-close-btn" aria-label="Close"
                     (click)="coverModal.hide()"
             >
@@ -112,8 +112,8 @@
             </button>
             <!-- Modal list of cover -->
             <div class="modal-body d-flex flex-column align-items-start pt-1 pb-0">
-              <p class="task__m-cover__text mt-0">Colors</p>
-              <div class="d-flex flex-wrap task__m-cover__card mt-0">
+              <p class="task__modal__text mt-0">Colors</p>
+              <div class="d-flex flex-wrap task__modal__card mt-0">
                 <li class="radio-group" *ngFor="let item of bgTask; let i = index">
                   <input type="radio" formControlName="taskBackground" [value]="item.taskBackground"
                          id="taskBackground+{{i}}"
@@ -125,7 +125,7 @@
                   </label>
                 </li>
                 <!-- No covers -->
-                <p class="task__m-cover__text m-0 px-2 pb-3 ">
+                <p class="task__modal__text m-0 px-2 pb-3 ">
                   <span [style.color]="'#172b4d'">No cover.</span>
                   <br/>
                   This won't show up on the header of cards.
@@ -144,7 +144,7 @@
           <div *ngIf="!toggleEditTag else changeTagView">
             <div class="modal-content modal-dialog-scrollable">
               <!-- Modal body -->
-              <p class="task__m-cover__header my-1">Tags</p>
+              <p class="task__modal__header my-1">Tags</p>
               <button type="button" class="close pull-right mt-1 task__m-close-btn" aria-label="Close"
                       (click)="tagsModal.hide()"
               >
@@ -152,21 +152,24 @@
               </button>
               <!-- Modal list of tags -->
               <div class="modal-body d-flex flex-column align-items-start pt-1 pb-0 modal-body--height"
-                   [style.max-height]="editTaskForm.value.taskBackground ? '350px' : '250px'"
+                   [style.max-height]="editTaskForm.value.taskBackground ? '390px' : '290px'"
               >
-                <p class="task__m-cover__text mt-0">Tags</p>
-                <div class="d-flex flex-column task__m-cover__card mt-0 mb-3">
+                <p class="task__modal__text mt-0">Tags</p>
+                <div class="d-flex flex-column task__modal__card mt-0 mb-3">
                   <li class="checkbox-group d-flex align-items-center" *ngFor="let item of tags; let i = index">
                     <input type="checkbox"
                            id="taskTag+{{i}}"
                            name="taskTag" mdbInput
+                           [checked]="checkTagActive(item.tagId, task.taskId)"
                            (change)="toggleTags($event, i)"
                     >
                     <label for="taskTag+{{i}}" [style.background-color]=item.tagBackground>
                       <p class="p-0"
                          [style.color]="item.tagBackground === '#344563'? 'white' : ''"
                       >{{item.tagName}}</p>
-                      <mdb-icon fas icon="check" class="checkbox-group--icon"></mdb-icon>
+                      <mdb-icon fas icon="check" class="checkbox-group--icon"
+                      [class.checkbox-group--icon--reverse]="item.tagBackground === null || ''"
+                      ></mdb-icon>
                       <span class="checkbox-group--fade"></span>
                     </label>
                     <!-- Tag edit button -->
@@ -178,11 +181,11 @@
                     <!-- Button view - new task -->
                   </li>
                   <div>
-                    <button class="task__item task__add-btn"
-                            (click)="editTagForm.reset(); toggleBtnEditTag(tags.length)"
+                    <button class="rounded task__desc__btn task__desc__btn--edit task__modal__add-btn mt-1"
+                            (click)="toggleBtnEditTag(null,tags.length)"
                     >
                       <mdb-icon class="fa" fas icon="plus" style="color: #172b4d;"></mdb-icon>
-                      Add a new task
+                      Add a new tag
                     </button>
                   </div>
                 </div>
@@ -193,9 +196,15 @@
           <ng-template #changeTagView>
             <div class="modal-content modal-dialog-scrollable">
               <!-- Modal body -->
-              <p class="task__m-cover__header my-1">Change tag</p>
-              <button type="button" class="pull-right mt-1 task__m-cover__change__btn"
-                      (click)="toggleBtnEditTag()"
+              <p *ngIf="toggleEditTag !== tags.length.toString() else AddTagHeaderView"
+                 class="task__modal__header my-1"
+              >Change tag</p>
+              <ng-template #AddTagHeaderView>
+                <p class="task__modal__header my-1"
+                >Create a tag</p>
+              </ng-template>
+              <button type="button" class="pull-right mt-1 task__modal__change-btn"
+                      (click)="toggleBtnEditTag(null)"
               ><i class="fas fa-chevron-left"></i>
               </button>
               <button type="button" class="close pull-right mt-1 task__m-close-btn" aria-label="Close"
@@ -205,17 +214,17 @@
               <!-- Modal list of tags background -->
               <form [formGroup]="editTagForm">
                 <div class="modal-body d-flex flex-column align-items-start pt-1 pb-0 modal-body--height"
-                     [style.max-height]="editTagForm.value.tagBackground ? '350px' : '250px'"
+                     style="max-height:290px"
                 >
-                  <div class="d-flex flex-column task__m-cover__card mt-0 mb-3">
-                    <p class="task__m-cover__text mt-0">Name</p>
-                    <input mdbInput mdbValidate formControlName="tagName" autocomplete="off"
-                           type="text" class="form-control my-2" id="tagName"
+                  <div class="d-flex flex-column task__modal__card task__modal__card--edit mt-0 mb-3">
+                    <p class="task__modal__text mt-0">Name</p>
+                    <input mdbInput formControlName="tagName" autocomplete="off"
+                           type="text" class="form-control my-2 task__modal__input" id="tagName"
 
                     >
-                    <p class="task__m-cover__text mt-0">Select a color</p>
-                    <div class="d-flex flex-wrap task__m-cover__card mt-0">
-                      <li class="radio-group" *ngFor="let item of tags; let i = index">
+                    <p class="task__modal__text mt-0">Select a color</p>
+                    <div class="d-flex flex-wrap task__modal__card mt-0">
+                      <li class="radio-group" *ngFor="let item of bgTag; let i = index">
                         <input type="radio" formControlName="tagBackground" [value]="item.tagBackground"
                                id="tagBackground+{{i}}"
                                name="tagBackground" mdbInput
@@ -225,20 +234,44 @@
                           <span class="radio-group--fade"></span>
                         </label>
                       </li>
+                      <!-- No background of tag -->
+                      <p class="task__modal__text m-0 px-2 pb-1">
+                        <span [style.color]="'#172b4d'">No background.</span>
+                        <br/>
+                        This won't show up on the background of tag.
+                      </p>
                     </div>
                     <!-- Edit tag - bottom button -->
-                    <div class="d-flex justify-content-between">
-                      <button type="button" class="checkbox-group__btn-edit"
-                              (click)="toggleBtnEditTag(); editTag(editTagForm.value)"
+                    <div *ngIf="toggleEditTag !== tags.length.toString() else AddTagBtnView"
+                         class="d-flex justify-content-between"
+                    >
+                      <button type="button" mdbBtn color="primary" class="rounded px-3 py-2"
+                              style="text-transform: none; width: 95px"
+                              (click)="toggleBtnEditTag(null); editTag(editTagForm.value)"
                       >
-                        <mdb-icon fas icon="pencil-alt"></mdb-icon>Edit
+                        <mdb-icon fas icon="pencil-alt pr-1"></mdb-icon>
+                        Edit
                       </button>
-                      <button type="button" class="checkbox-group__btn-edit"
-                              (click)="toggleBtnEditTag(); deleteTag(editTagForm.value.tagId)"
+                      <button type="button" mdbBtn color="outline-danger" class="rounded px-3 py-2"
+                              style="text-transform: none"
+                              (click)="toggleBtnEditTag(null); deleteTag(editTagForm.value.tagId)"
                       >
-                        <mdb-icon fas icon="pencil-alt"></mdb-icon>Delete
+                        <mdb-icon fas icon="pencil-alt pr-1"></mdb-icon>
+                        Delete
                       </button>
                     </div>
+                    <!-- Add tag - bottom button -->
+                    <ng-template #AddTagBtnView>
+                      <div class="d-flex justify-content-between">
+                        <button type="button" mdbBtn color="primary" class="rounded px-3 py-2"
+                                style="text-transform: none"
+                                (click)="toggleBtnEditTag(null); addTag(editTagForm.value, tags.length)"
+                        >
+                          <mdb-icon fas icon="pencil-alt pr-1"></mdb-icon>
+                          Add
+                        </button>
+                      </div>
+                    </ng-template>
                   </div>
                 </div>
               </form>
