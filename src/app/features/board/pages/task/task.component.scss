@@ -103,6 +103,51 @@ pre {
       color: #42526E;
       top: 20px;
       left: 12px;
+    }
+  }
+
+  &__tag {
+    position: relative;
+    display: inline-block;
+
+    &__link {
+      z-index: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.09);
+      }
+    }
+
+    &__name {
+      position: relative;
+      display: inline-block;
+      border-radius: 3px;
+      min-height: 30px;
+      min-width: 40px;
+      font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    &__btn {
+      background-color: #091e420a;
+      border: none;
+      font-size: 14px;
+      max-height: 30px;
+      min-width: 40px;
+      opacity: 0.9;
+
+      &:hover {
+        background-color: #091e4214;
+        border: none;
+        box-shadow: none;
+      }
 
     }
   }
@@ -284,13 +329,15 @@ pre {
       font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
 
     }
-    &__input{
+
+    &__input {
       box-shadow: inset 0 0 0 2px #0079bf;
       font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
     }
 
     &__card {
       width: 270px;
+
       &--edit {
         height: 270px;
       }
@@ -322,7 +369,8 @@ pre {
         opacity: 0.75;
       }
     }
-    &__add-btn{
+
+    &__add-btn {
       width: 265px;
       margin-left: 2px;
     }
@@ -414,7 +462,8 @@ pre {
         background-color: white;
         border-radius: 50%;
         font-weight: 600;
-        &--reverse{
+
+        &--reverse {
           color: white;
           background-color: black;
         }

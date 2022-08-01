@@ -137,6 +137,26 @@ export class BoardsService {
                   tagId: "3",
                   tagName: "Important",
                 },
+                {
+                  tagId: "1",
+                  tagName: "Warning",
+                  tagBackground: "#F2D600",
+                },
+                {
+                  tagId: "2",
+                  tagName: "Need to do",
+                  tagBackground: "#FF9F1A",
+                },
+                {
+                  tagId: "1",
+                  tagName: "",
+                  tagBackground: "#F2D600",
+                },
+                {
+                  tagId: "2",
+                  tagName: "",
+                  tagBackground: "#B3BAC5",
+                },
               ],
               taskDate: "unknown",
               taskBackground: "#5BA4CF",
@@ -337,6 +357,11 @@ export class BoardsService {
       tagName: "Black List",
       tagBackground: "#344563",
     },
+    {
+      tagId: "10",
+      tagName: "White",
+      tagBackground: "",
+    },
   ];
 
   public getBoards(): IBoards[] {
@@ -415,9 +440,16 @@ export class BoardsService {
     return this.Tags.find(tag => tag.tagId === tagId)
   }
 
-  public addTag(form, tagLength) {
-    this.Tags.push({...form, tagId: tagLength});
-    console.log(this.Tags)
+  public getTagTask(idTask, idBoard, idColumn) {
+    return this.boards.filter(item => item.boardId === idBoard)[0].boardColumn
+      .filter(item => item.columnId === idColumn)[0].columnTask
+      .filter(item => item.taskId === idTask)[0].taskTag;
+  }
+
+  public addTag(form) {
+    let randomId = getUniqueID();
+    this.Tags.push({...form, tagId: randomId});
+   // console.log(this.Tags)
   }
 
   public editTag(form) {
@@ -434,6 +466,5 @@ export class BoardsService {
       .filter(item => item.columnId === idColumn)[0].columnTask
       .filter(item => item.taskId === idTask)[0].taskTag
       .filter(item => item.tagId === itemId)[0];
-
   }
 }

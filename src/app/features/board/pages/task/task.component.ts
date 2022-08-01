@@ -56,9 +56,10 @@ export class TaskComponent implements OnInit {
     this.editTagForm = this.fb.group({
       tagId: '',
       tagName: '',
-      tagBackground: '',
+      tagBackground: "",
     })
     this.getBoardById();
+    this.getTagTask();
   }
 
   getBoardById(): void {
@@ -70,6 +71,12 @@ export class TaskComponent implements OnInit {
 
   getTag() {
     return this.tags = this.boardsService.Tags;
+  }
+
+  getTagTask() {
+    //this.editTaskForm.value.taskTag.patchValue(this.fb.group(this.boardsService.getTagTask(this.idTask, this.idBoard, this.idColumn)));
+   // this.editTaskForm.value.taskTag.push(this.fb.group(this.boardsService.getTagTask(this.idTask, this.idBoard, this.idColumn)));
+    console.log(this.boardsService.getTagTask(this.idTask, this.idBoard, this.idColumn))
   }
 
   closeBoard() {
@@ -115,7 +122,6 @@ export class TaskComponent implements OnInit {
     this.editTaskForm.patchValue({taskDesc: this.tempTaskDesc})
     this.editTaskForm.updateValueAndValidity();
     this.toggleEditTaskDesc = null;
-    console.log(this.editTaskForm)
   }
 
   fff() {
@@ -125,6 +131,8 @@ export class TaskComponent implements OnInit {
   toggleTags(event, index) {
     if (event.target.checked) {
       this.editTaskForm.value.taskTag.push(this.tags[index]);
+      console.log(  this.editTaskForm.value)
+      this.getTag();
     } else {
       this.editTaskForm.value.taskTag = this.editTaskForm.value.taskTag.filter(item => item.tagId != index)
     }
@@ -139,15 +147,16 @@ export class TaskComponent implements OnInit {
       this.editTagForm.patchValue(this.boardsService.getTag(tagId))
     }
     if (tagLength) {
+      this.toggleEditTag = tagLength;
       this.toggleEditTag = tagLength.toString();
       this.editTagForm.reset();
     }
-    console.log("tagId",tagId, "newTag", tagLength, "this.toggleEditTag", this.toggleEditTag)
+   console.log("tagId",tagId, "newTag", tagLength, "this.toggleEditTag", this.toggleEditTag)
   }
 
 
-  addTag(form, tagLength) {
-    this.boardsService.addTag(form, tagLength.toString());
+  addTag(form) {
+    this.boardsService.addTag(form);
     this.getTag();
   }
 

@@ -14,7 +14,7 @@
          [style.background-color]="editTaskForm.value.taskBackground"
     ></div>
     <!-- Task form -->
-    <form class="p-0 m-0 form-row justify-content-end form" [formGroup]="editTaskForm">
+    <form class="p-0 m-0 form-row form" [formGroup]="editTaskForm">
       <div class="task__name p-0 m-0 col-12" (click)="$event.stopPropagation()">
         <!-- Form view - task name -->
         <a class="task__name__link" (click)="toggleBtnTaskName(task.taskId)">
@@ -39,6 +39,27 @@
             >
           </div>
         </div>
+      </div>
+      <!-- Task tag -->
+      <div *ngIf="task.taskTag.length" class="col-8 ml-5">
+      <p class="task__modal__text pl-2 mt-0">Tags</p>
+      <div class="d-flex mb-2">
+        <div *ngFor="let tagTask of task.taskTag; let i = index" class="task__tag">
+            <span class="task__tag__name py-1 px-2 m-1"
+                  [style.background-color]="tagTask.tagBackground"
+            >
+              <a class="task__tag__link" (click)="toggleBtnEditTag(); tagsModal.show()">
+            </a>{{tagTask.tagName}}
+          </span>
+        </div>
+        <button
+          type="button"
+          class="rounded task__tag__btn m-1"
+          (click)="tagsModal.show(); toggleBtnEditTag(null,tags.length)"
+        >
+          <mdb-icon class="fa" fas icon="plus" style="color: #172b4d;"></mdb-icon>
+        </button>
+      </div>
       </div>
       <!-- Task description -->
       <div class="col-9" (click)="$event.stopPropagation()">
@@ -168,7 +189,7 @@
                          [style.color]="item.tagBackground === '#344563'? 'white' : ''"
                       >{{item.tagName}}</p>
                       <mdb-icon fas icon="check" class="checkbox-group--icon"
-                      [class.checkbox-group--icon--reverse]="item.tagBackground === null || ''"
+                                [class.checkbox-group--icon--reverse]="item.tagBackground === null || ''"
                       ></mdb-icon>
                       <span class="checkbox-group--fade"></span>
                     </label>
@@ -265,7 +286,7 @@
                       <div class="d-flex justify-content-between">
                         <button type="button" mdbBtn color="primary" class="rounded px-3 py-2"
                                 style="text-transform: none"
-                                (click)="toggleBtnEditTag(null); addTag(editTagForm.value, tags.length)"
+                                (click)="toggleBtnEditTag(null); addTag(editTagForm.value)"
                         >
                           <mdb-icon fas icon="pencil-alt pr-1"></mdb-icon>
                           Add
@@ -310,7 +331,7 @@
           Members
         </button>
       </div>
-      <div class="mr-3 m-2 p-2 d-flex align-items-end">
+      <div class="mr-3 m-2 p-2 d-flex align-items-end justify-content-end w-100">
         <!-- Submit button -->
         <button type="submit" mdbBtn color="outline-success" class="rounded task__bottom-btn p-0"
                 (click)="fff()" mdbWavesEffect>Edit
