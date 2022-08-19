@@ -61,12 +61,8 @@ p {
 
       &--del {
         height: 32px;
+        color: white;
         background-color: indianred;
-      }
-
-      &--dis {
-        opacity: 0.65;
-        pointer-events: none;
       }
 
       &--icon {
@@ -109,7 +105,7 @@ p {
 
   &__item {
     position: relative;
-    font-family: Segoe UI, Roboto, sans-serif;
+    font-family: "BlinkMacSystemFont", "Segoe UI", "Roboto", sans-serif;
     width: 272px;
     height: 100%;
     font-size: 14px;
@@ -242,9 +238,19 @@ p {
     overflow: hidden;
     padding: 6px 8px 2px;
     font-weight: 400;
-    border: #00000049 solid 0.5px;
     border-radius: 6px;
     background-color: white;
+    &--bg {
+      padding-top: 24px !important;
+      font-size: 16px;
+      font-weight: 500;
+      .task__icon {
+        font-size: 14px;
+      }
+    }
+    &--bg-w {
+      color: white;
+    }
   }
 
   &__form {
@@ -303,8 +309,4 @@ p {
     bottom: 0;
     background-color: rgba(226, 228, 234, 0.5);
   }
-}
-
-.as {
-  background: transparent;
 }

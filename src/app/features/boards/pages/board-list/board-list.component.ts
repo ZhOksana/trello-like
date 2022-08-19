@@ -44,7 +44,7 @@ export class BoardListComponent {
     });
   }
 
-  openEditBoard(id) {
+  openEditBoard(idBoard) {
     this.modalRef = this.modalService.show(BoardEditComponent, {
       backdrop: false,
       keyboard: true,
@@ -55,7 +55,7 @@ export class BoardListComponent {
       containerClass: 'right',
       animated: true,
       data: {
-        id
+        idBoard
       }
     });
     this.modalRef.content.actionEdit.pipe(take(1)).subscribe(() => {

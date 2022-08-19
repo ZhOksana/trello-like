@@ -20,7 +20,7 @@
             <!-- Button view - name of column -->
             <!-- Edit button -->
             <a class="column__header__container"
-               (click)=" editColumnItem.patchValue(itemColumn); editColumnButton(this.editColumnItem.value, itemColumn.columnId)">
+               (click)="editColumnItem.patchValue(itemColumn); editColumnButton(itemColumn.columnId)">
               <div *ngIf="toggleEditColumn !== itemColumn.columnId"
                    class="d-flex justify-content-between column__header__content"
               >
@@ -42,15 +42,14 @@
               >
                 <mdb-icon class="fa" fas icon="edit"></mdb-icon>
               </a>
-              <a type="submit" mdbBtn
-                 class="my-0 ml-1 mr-0 p-2 rounded column__header__btn--del"
-                 [class.column__header__btn--dis]="toggleDeleteColumn === itemColumn.columnId"
-                 (click)="deleteColumn(this.editColumnItem.value)"
-                 data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+              <button type="submit" mdbBtn
+                      class="my-0 ml-1 mr-0 p-2 rounded column__header__btn--del"
+                      [disabled]="itemColumn.columnTask.length"
+                      (click)="deleteColumn(itemColumn.columnId)"
               >
                 <mdb-icon class="fa" fas icon="trash"
                 ></mdb-icon>
-              </a>
+              </button>
               <a type="button" class="ml-2 close align-self-start"
                  (click)="toggleEditColumn = null; toggleDeleteColumn = null">
                 <mdb-icon class="column__header__btn--icon" fas icon="times"></mdb-icon>
@@ -67,19 +66,20 @@
         >
           <!-- Task list -->
           <li *ngFor="let taskColumn of itemColumn.columnTask"
+              [style.background-color]="taskColumn.taskBackground"
+              [class.task__item--bg]="taskColumn.taskBackground"
+              [class.task__item--bg-w]="taskColumn.taskBackground === '#172B4D'"
               class="m-2 p-2 task__item z-depth-1 task__content" cdkDrag
           >
             <!-- Task container -->
-              <!-- Task link -->
-              <a [routerLink]="['board/', taskColumn.taskId]" class="task__link"> </a>
-
-                <!-- Task name -->
-                <p class="task__name">{{taskColumn.taskName}}</p>
-                <!-- Task edit icon -->
-                <span class="pt-1 pl-2 task__icon ">
+            <!-- Task link -->
+            <a class="task__link" (click)="openTask(idBoard, itemColumn.columnId , taskColumn.taskId)"> </a>
+            <!-- Task name -->
+            <p class="task__name">{{taskColumn.taskName}}</p>
+            <!-- Task edit icon -->
+            <span class="pt-1 pl-2 task__icon">
                 <mdb-icon fas icon="pencil"></mdb-icon>
                   </span>
-
           </li>
           <!-- Task addition form -->
           <form [formGroup]="addTaskItem" class="task__form" (click)="$event.stopPropagation()">
@@ -117,7 +117,7 @@
     </div>
     <!-- Column addition form -->
     <form [formGroup]="addColumnItem" class="column__form">
-      <!-- Button view - new task -->
+      <!-- Button view - new column -->
       <div *ngIf="toggleAddColumn === null">
         <button class="m-2 column__item column__add-btn"
                 (click)="toggleAddColumn = 'true'">

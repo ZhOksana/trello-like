@@ -1,7 +1,7 @@
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark  light-blue darken-3">
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="./"><img src="../../../../assets/images/header-right-logo.png" style="width:40px" alt="logo"></a>
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/"><img src="../../../../assets/images/header-right-logo.png" style="width:40px" alt="logo"></a>
   </mdb-navbar-brand>
   <!-- Collapsible content -->
   <links>
@@ -10,20 +10,8 @@
       <li class="nav-item active">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/">Boards<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
-      </li>
     </ul>
-    <ul class="navbar-nav ms-auto col-4">
-      <!-- Search form -->
-      <form class="form-inline waves-light" mdbWavesEffect>
-        <div class="md-form my-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        </div>
-      </form>
+    <ul class="navbar-nav ms-auto col-4 flex-row-reverse">
       <!--Profile dropdown-->
       <li class="nav-item dropdown" dropdown>
         <a class="nav-link dropdown-toggle waves-light" dropdownToggle mdbWavesEffect type="button" >

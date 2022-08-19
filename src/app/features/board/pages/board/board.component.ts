@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {IBoards} from "@shared/interfaces/boards.interface";
-import {MDBModalService} from "angular-bootstrap-md";
+import {MDBModalRef, MDBModalService} from "angular-bootstrap-md";
 import {BoardsService} from "@core/services/boards.service";
 import {ActivatedRoute} from "@angular/router";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {TaskComponent} from "../task/task.component";
 
 @Component({
   selector: 'app-board',
@@ -22,7 +23,7 @@ export class BoardComponent implements OnInit {
   public toggleAddTask: string = null;
   public toggleEditColumn: string = null;
   public toggleDeleteColumn: string = null;
-  public taskLength: number = null
+  public modalRef: MDBModalRef | null = null;
 
   constructor(private modalService: MDBModalService,
               private boardsService: BoardsService,
@@ -95,14 +96,9 @@ export class BoardComponent implements OnInit {
     }, 0)
   }
 
-  editColumnButton(form, id: string) {
+  editColumnButton(id: string) {
     this.toggleEditColumn = id;
-    this.taskLength = this.board.boardColumn.filter(item => item.columnId === form.columnId)
-      .find(item => item.columnId == form.columnId).columnTask.length
-    if(this.taskLength > 0) {
-      this.toggleDeleteColumn = id;
-    }
-    console.log(this.toggleDeleteColumn)
+    this.toggleDeleteColumn = id;
   }
 
   toggleFormView() {
@@ -117,12 +113,33 @@ export class BoardComponent implements OnInit {
   }
 
   editColumn(form) {
-    this.boardsService.editColumn(form, this.idBoard)
-    this.toggleEditColumn = null;
+    if (this.editColumnItem.valid) {
+      this.boardsService.editColumn(form, this.idBoard)
+      this.toggleEditColumn = null;
+    }
   }
 
-  deleteColumn(form) {
-    if (this.taskLength === 0)
-      this.boardsService.deleteColumn(form, this.idBoard)
+  deleteColumn(id) {
+    this.boardsService.deleteColumn(id, this.idBoard)
+  }
+
+  openTask(idBoard, idColumn, idTask) {
+    this.modalRef = this.modalService.show(TaskComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog-centered modal-lg',
+      animated: true,
+      data: {
+        idTask,
+        idColumn,
+        idBoard
+      }
+    });
+    /*    this.modalRef.content.actionAdd.pipe(take(1)).subscribe((board: IBoards) => {
+          this.boardsService.addBoard(board);
+        });*/
   }
 }

@@ -51,7 +51,7 @@
         <div mdbModal #basicModal="mdbModal" class="modal modal-frame modal-bottom" tabindex="-1" role="dialog"
              aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: false}">
           <div class="modal-dialog modal-frame modal-bottom" role="document">
-            <div class="modal-content  modal-delete">
+            <div class="modal-content modal-delete">
               <!-- Modal body -->
               <div class="modal-body d-flex flex-column align-items-center">
                 <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
@@ -67,16 +67,17 @@
             </div>
           </div>
         </div>
-        <!-- Cancel button -->
+
         <div class="modal-footer justify-content-center mx-0 px-0">
-          <button type="button" mdbBtn color="secondary" class="waves-light relative rounded" aria-label="Close"
-                  (click)="closeBoard()"
-                  mdbWavesEffect>Cancel
-          </button>
           <!-- Submit button -->
-          <button type="submit" mdbBtn color="primary" class="waves-light relative rounded"
+          <button type="submit" mdbBtn color="success" class="waves-light relative rounded"
                   (click)="editBoard(this.editBoardForm.value)"
                   mdbWavesEffect>Edit
+          </button>
+          <!-- Cancel button -->
+          <button type="button" mdbBtn color="outline-danger" class="waves-light relative rounded" aria-label="Close"
+                  (click)="closeBoard()"
+                  mdbWavesEffect>Cancel
           </button>
         </div>
       </div>
